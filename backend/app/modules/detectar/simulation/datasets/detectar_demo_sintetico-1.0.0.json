@@ -1,0 +1,399 @@
+{
+ "dataset_id": "detectar_demo_sintetico",
+ "version": "1.0.0",
+ "naturaleza": "sintetico_demostracion",
+ "descripcion": "Conjunto SINTÉTICO de demostración de DETECTAR. Todos los temas, términos, artículos y valores son inventados para probar las vistas y los cálculos; no describen el comportamiento real de ningún tema.",
+ "procedencia": "Redactado por el equipo DETECTAR para el cierre del módulo, con valores deterministas: totales semanales elegidos para recorrer las reglas stages-v1 sin modificarlas, repartidos por día con una variación fija. No procede de Google Trends, Wikimedia, GDELT ni de ninguna otra fuente, ni contiene datos personales.",
+ "proposito": "Verificar visualmente la oficina (temas, series de métricas, clasificaciones con evidencias y datos insuficientes) en una base temporal aislada en modo simulated.",
+ "limitaciones": [
+  "Las cifras son inventadas: no sirven como evidencia de ninguna tendencia real.",
+  "El campo fuente indica qué formato y qué reglas de conector imita cada serie, no su origen.",
+  "La indicación fuente_validada procede de la validación del conector real; no valida estos datos sintéticos.",
+  "Los artículos y términos no existen en Wikipedia ni en GDELT."
+ ],
+ "periodo": {
+  "inicio": "2026-09-01",
+  "fin": "2026-09-30"
+ },
+ "momento_registro": "2026-10-01T00:00:00Z",
+ "fechas_metricas": [
+  "2026-09-21",
+  "2026-09-22",
+  "2026-09-23",
+  "2026-09-24",
+  "2026-09-25",
+  "2026-09-26",
+  "2026-09-27",
+  "2026-09-28",
+  "2026-09-29",
+  "2026-09-30"
+ ],
+ "fecha_clasificacion": "2026-09-30",
+ "escenarios": {
+  "Tema demo Alfa": "Visitas diarias con crecimiento acelerado; artículos en aumento (fuente no validada); aparece en las últimas capturas de Google Trends (MX).",
+  "Tema demo Beta": "Subida en la ventana anterior y meseta en la actual.",
+  "Tema demo Gamma": "Solo artículos (fuente no validada): no puede determinar la etapa.",
+  "Tema demo Delta": "Solo cinco días de visitas: historia insuficiente.",
+  "Tema demo Épsilon": "Presente en todas las capturas de Google Trends (MX) sin cambios."
+ },
+ "unidades": {
+  "wikimedia/wiki_pageviews": "views (visitas diarias)",
+  "gdelt/gdelt_article_count": "articles (artículos diarios)",
+  "google_trends_rss/gtr_trending_presence": "presence (1 = presente en la captura)"
+ },
+ "series": [
+  {
+   "fuente": "wikimedia",
+   "proyecto": "es.wikipedia.org",
+   "articulo": "Tema_demo_Alfa",
+   "idioma": "es",
+   "diario": {
+    "2026-09-01": 99,
+    "2026-09-02": 102,
+    "2026-09-03": 98,
+    "2026-09-04": 101,
+    "2026-09-05": 99,
+    "2026-09-06": 102,
+    "2026-09-07": 97,
+    "2026-09-08": 100,
+    "2026-09-09": 103,
+    "2026-09-10": 108,
+    "2026-09-11": 111,
+    "2026-09-12": 109,
+    "2026-09-13": 112,
+    "2026-09-14": 107,
+    "2026-09-15": 110,
+    "2026-09-16": 113,
+    "2026-09-17": 130,
+    "2026-09-18": 133,
+    "2026-09-19": 131,
+    "2026-09-20": 134,
+    "2026-09-21": 129,
+    "2026-09-22": 132,
+    "2026-09-23": 135,
+    "2026-09-24": 183,
+    "2026-09-25": 186,
+    "2026-09-26": 184,
+    "2026-09-27": 187,
+    "2026-09-28": 182,
+    "2026-09-29": 185,
+    "2026-09-30": 188
+   }
+  },
+  {
+   "fuente": "wikimedia",
+   "proyecto": "es.wikipedia.org",
+   "articulo": "Tema_demo_Beta",
+   "idioma": "es",
+   "diario": {
+    "2026-09-01": 99,
+    "2026-09-02": 102,
+    "2026-09-03": 98,
+    "2026-09-04": 101,
+    "2026-09-05": 99,
+    "2026-09-06": 102,
+    "2026-09-07": 97,
+    "2026-09-08": 100,
+    "2026-09-09": 103,
+    "2026-09-10": 98,
+    "2026-09-11": 101,
+    "2026-09-12": 99,
+    "2026-09-13": 102,
+    "2026-09-14": 97,
+    "2026-09-15": 100,
+    "2026-09-16": 103,
+    "2026-09-17": 148,
+    "2026-09-18": 151,
+    "2026-09-19": 149,
+    "2026-09-20": 152,
+    "2026-09-21": 147,
+    "2026-09-22": 150,
+    "2026-09-23": 153,
+    "2026-09-24": 152,
+    "2026-09-25": 155,
+    "2026-09-26": 153,
+    "2026-09-27": 156,
+    "2026-09-28": 151,
+    "2026-09-29": 154,
+    "2026-09-30": 157
+   }
+  },
+  {
+   "fuente": "wikimedia",
+   "proyecto": "es.wikipedia.org",
+   "articulo": "Tema_demo_Delta",
+   "idioma": "es",
+   "diario": {
+    "2026-09-26": 40,
+    "2026-09-27": 44,
+    "2026-09-28": 39,
+    "2026-09-29": 47,
+    "2026-09-30": 45
+   }
+  },
+  {
+   "fuente": "gdelt",
+   "termino": "Tema demo Alfa",
+   "idioma": "es",
+   "diario": {
+    "2026-09-01": 4,
+    "2026-09-02": 4,
+    "2026-09-03": 4,
+    "2026-09-04": 4,
+    "2026-09-05": 4,
+    "2026-09-06": 4,
+    "2026-09-07": 4,
+    "2026-09-08": 4,
+    "2026-09-09": 4,
+    "2026-09-10": 5,
+    "2026-09-11": 5,
+    "2026-09-12": 5,
+    "2026-09-13": 5,
+    "2026-09-14": 5,
+    "2026-09-15": 5,
+    "2026-09-16": 5,
+    "2026-09-17": 6,
+    "2026-09-18": 6,
+    "2026-09-19": 6,
+    "2026-09-20": 6,
+    "2026-09-21": 6,
+    "2026-09-22": 6,
+    "2026-09-23": 6,
+    "2026-09-24": 9,
+    "2026-09-25": 9,
+    "2026-09-26": 9,
+    "2026-09-27": 9,
+    "2026-09-28": 9,
+    "2026-09-29": 9,
+    "2026-09-30": 9
+   }
+  },
+  {
+   "fuente": "gdelt",
+   "termino": "Tema demo Gamma",
+   "idioma": "es",
+   "diario": {
+    "2026-09-01": 2,
+    "2026-09-02": 2,
+    "2026-09-03": 2,
+    "2026-09-04": 2,
+    "2026-09-05": 2,
+    "2026-09-06": 2,
+    "2026-09-07": 2,
+    "2026-09-08": 2,
+    "2026-09-09": 2,
+    "2026-09-10": 3,
+    "2026-09-11": 3,
+    "2026-09-12": 3,
+    "2026-09-13": 3,
+    "2026-09-14": 3,
+    "2026-09-15": 3,
+    "2026-09-16": 3,
+    "2026-09-17": 4,
+    "2026-09-18": 4,
+    "2026-09-19": 4,
+    "2026-09-20": 4,
+    "2026-09-21": 4,
+    "2026-09-22": 4,
+    "2026-09-23": 4,
+    "2026-09-24": 7,
+    "2026-09-25": 7,
+    "2026-09-26": 7,
+    "2026-09-27": 7,
+    "2026-09-28": 7,
+    "2026-09-29": 7,
+    "2026-09-30": 7
+   }
+  },
+  {
+   "fuente": "google_trends_rss",
+   "pais": "MX",
+   "capturas": [
+    {
+     "momento": "2026-09-01T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-02T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-03T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-04T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-05T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-06T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-07T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-08T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-09T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-10T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-11T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-12T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-13T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-14T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-15T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-16T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-17T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-18T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-19T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-20T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-21T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-22T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-23T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-24T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-25T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-26T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon"
+     ]
+    },
+    {
+     "momento": "2026-09-27T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon",
+      "Tema demo Alfa"
+     ]
+    },
+    {
+     "momento": "2026-09-28T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon",
+      "Tema demo Alfa"
+     ]
+    },
+    {
+     "momento": "2026-09-29T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon",
+      "Tema demo Alfa"
+     ]
+    },
+    {
+     "momento": "2026-09-30T12:00:00Z",
+     "titulos": [
+      "Tema demo Épsilon",
+      "Tema demo Alfa"
+     ]
+    }
+   ]
+  }
+ ]
+}

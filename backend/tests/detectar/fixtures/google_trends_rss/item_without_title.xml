@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fixture sintético: un elemento válido y uno sin título. -->
+<rss version="2.0" xmlns:ht="https://trends.google.com/trending/rss">
+  <channel>
+    <item><title>tema valido</title><ht:approx_traffic>500+</ht:approx_traffic></item>
+    <item><ht:approx_traffic>200+</ht:approx_traffic></item>
+  </channel>
+</rss>

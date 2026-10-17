@@ -1,0 +1,90 @@
+.dialog {
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  max-height: 100dvh;
+}
+.dialog::backdrop {
+  background: rgba(3, 6, 10, 0.68);
+  backdrop-filter: blur(2px);
+}
+
+.drawer {
+  margin: 0 0 0 auto;
+  width: min(640px, 100vw);
+  height: 100dvh;
+  border-radius: var(--radius-l) 0 0 var(--radius-l);
+  border-right: 0;
+}
+.drawer[open] {
+  animation: slide-in 220ms var(--ease);
+}
+
+.modal {
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  border-radius: var(--radius-l);
+}
+.modal[open] {
+  animation: fade-in 180ms var(--ease);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: inherit;
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  z-index: 1;
+}
+.title {
+  font-size: 19px;
+}
+.subtitle {
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+.body {
+  padding: var(--space-5);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+@keyframes fade-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .drawer {
+    border-radius: 0;
+  }
+  .head,
+  .body {
+    padding: var(--space-4);
+  }
+}

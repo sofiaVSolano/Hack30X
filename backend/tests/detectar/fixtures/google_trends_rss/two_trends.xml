@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fixture sintético para pruebas. Estructura basada en la observada el 16/10/2026; los contenidos son inventados y no representan tendencias reales. -->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:ht="https://trends.google.com/trending/rss">
+  <channel>
+    <title>Daily Search Trends</title>
+    <description>Recent searches</description>
+    <link>https://trends.google.com/trending/rss?geo=MX</link>
+    <atom:link href="https://trends.google.com/trending/rss?geo=MX" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>tema de prueba uno</title>
+      <ht:approx_traffic>2K+</ht:approx_traffic>
+      <description></description>
+      <pubDate>Fri, 16 Oct 2026 20:10:00 -0700</pubDate>
+      <ht:picture>https://example.test/imagen1.jpg</ht:picture>
+      <ht:picture_source>Medio de Prueba</ht:picture_source>
+      <ht:news_item>
+        <ht:news_item_title>Titular sintético uno</ht:news_item_title>
+        <ht:news_item_snippet>Resumen sintético</ht:news_item_snippet>
+        <ht:news_item_url>https://example.test/noticia-1</ht:news_item_url>
+        <ht:news_item_picture>https://example.test/n1.jpg</ht:news_item_picture>
+        <ht:news_item_source>Medio de Prueba</ht:news_item_source>
+      </ht:news_item>
+      <ht:news_item>
+        <ht:news_item_title>Titular con enlace no permitido</ht:news_item_title>
+        <ht:news_item_url>javascript:alert(1)</ht:news_item_url>
+        <ht:news_item_source>Otro Medio</ht:news_item_source>
+      </ht:news_item>
+    </item>
+    <item>
+      <title>  tema de prueba dos  </title>
+      <pubDate>fecha no válida</pubDate>
+    </item>
+  </channel>
+</rss>

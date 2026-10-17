@@ -1,0 +1,97 @@
+/* Leyenda de la planta: cada conteo explica un estado visible de los puestos. */
+.kpis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  padding: 0 var(--space-2);
+}
+.kpi {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.kpiValue {
+  font-size: 18px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.kpiLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6) var(--space-5);
+  margin-top: var(--space-6);
+}
+/* Paneles secundarios sobrios: columnas con un filete superior, no tarjetas. La planta es la protagonista. */
+.columns > :global(.panel) {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line-strong);
+  border-radius: 0;
+  padding: var(--space-4) 0 0;
+}
+.limits {
+  grid-column: span 3;
+  border-color: rgba(243, 185, 74, 0.25);
+}
+.limitList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3) var(--space-6);
+  font-size: 14px;
+}
+
+.feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.feed li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.feed li:last-child {
+  border-bottom: 0;
+}
+.feedMain {
+  flex: 1 1 140px;
+  min-width: 0;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1180px) {
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .limits {
+    grid-column: span 2;
+  }
+}
+@media (max-width: 760px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .limits {
+    grid-column: auto;
+  }
+  .limitList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

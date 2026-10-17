@@ -1,0 +1,137 @@
+.desk {
+  display: block;
+  overflow: visible;
+  max-width: 100%;
+  height: auto;
+}
+.table {
+  fill: #1c2e41;
+  stroke: var(--wall);
+  stroke-width: 1.2;
+}
+.monitor {
+  fill: #0b141e;
+  stroke: #3a516a;
+  stroke-width: 1.2;
+}
+.stand,
+.keyboard {
+  fill: #2a3f55;
+}
+.screen {
+  fill: #121f2d;
+  transition: fill 300ms var(--ease);
+}
+.lamp {
+  fill: #3a4d61;
+}
+.lampGlow {
+  fill: var(--lamp);
+  opacity: 0;
+}
+.chair {
+  fill: #1a2a3b;
+  stroke: var(--wall);
+  stroke-width: 1.2;
+  transition:
+    cx 300ms var(--ease),
+    cy 300ms var(--ease);
+}
+.shoulders {
+  fill: #6f8aa6;
+}
+.head {
+  fill: #9fb4c9;
+}
+
+/* Rol sin tarea: silla apartada, sin agente, mesa tenue */
+.desk[data-state="vacante"] .table {
+  fill: #172636;
+  stroke-dasharray: 3 3;
+}
+.desk[data-state="vacante"] .monitor {
+  opacity: 0.55;
+}
+
+/* Implementado: el agente lleva el acento de HACK 30X */
+.desk:not([data-state="vacante"]) .shoulders {
+  fill: #7f9a6a;
+}
+.desk:not([data-state="vacante"]) .head {
+  fill: #c5d6b5;
+}
+
+/* Último resultado: pantalla en reposo con su símbolo */
+.glyphOk,
+.glyphBad,
+.glyphWarn {
+  fill: none;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.glyphOk {
+  stroke: var(--ok);
+}
+.glyphBad {
+  stroke: var(--danger);
+}
+.glyphWarn {
+  stroke: var(--warn);
+}
+.standby {
+  fill: var(--text-faint);
+}
+
+/* Trabajando (solo pendiente/en_curso según la API) */
+.desk[data-state="trabajando"] .screen {
+  fill: #1f3a2a;
+}
+.desk[data-state="trabajando"] .lamp {
+  fill: var(--lamp);
+}
+.desk[data-state="trabajando"] .lampGlow {
+  opacity: 0.22;
+}
+.line {
+  fill: var(--signal);
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: type 1.6s steps(6, end) infinite;
+}
+.line:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.line:nth-child(3) {
+  animation-delay: 0.8s;
+}
+.desk[data-state="trabajando"] .agent {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lean 2.4s ease-in-out infinite;
+}
+
+@keyframes type {
+  0% {
+    transform: scaleX(0.15);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+@keyframes lean {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line,
+  .desk[data-state="trabajando"] .agent {
+    animation: none;
+  }
+}
