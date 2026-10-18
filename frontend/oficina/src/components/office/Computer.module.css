@@ -1,0 +1,293 @@
+/* Dentro del computador: el mismo azul noche, más profundo y técnico; acento azul eléctrico. */
+.computer {
+  --bg: #050b18;
+  --surface: #0a1430;
+  --surface-2: #0e1a3b;
+  --surface-3: #14244c;
+  --line: #1c2c55;
+  --line-strong: #2b3f74;
+
+  position: fixed;
+  inset: 12px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid #22356b;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.6),
+    0 0 0 6px rgba(61, 123, 255, 0.06);
+}
+/* Detalle del marco: un filo de luz en el borde superior de la pantalla. */
+.computer::before {
+  content: "";
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(91, 140, 255, 0.7), transparent);
+  pointer-events: none;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  background: #070f22;
+  flex-wrap: wrap;
+}
+.crumbs ol {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+.crumbs li + li::before {
+  content: "›";
+  margin-right: 6px;
+  color: var(--text-faint);
+}
+.crumbs a {
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 4px;
+}
+.crumbs a:hover,
+.crumbBtn:hover {
+  color: var(--text);
+}
+.crumbs [aria-current="page"] {
+  color: var(--electric-text);
+  font-weight: 600;
+}
+.crumbBtn {
+  all: unset;
+  color: var(--text-muted);
+  border-radius: 4px;
+}
+.crumbBtn:focus-visible,
+.crumbs a:focus-visible {
+  outline: 2px solid var(--electric-text);
+  outline-offset: 2px;
+}
+.tools {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.exit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--electric-fill);
+  background: var(--electric-fill);
+  color: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 160ms var(--ease-out), transform 140ms var(--ease-out);
+}
+.exit:active {
+  transform: scale(0.97);
+}
+@media (hover: hover) and (pointer: fine) {
+  .exit:hover {
+    background: var(--electric-fill-hover);
+  }
+}
+
+.moduleBar {
+  display: flex;
+  align-items: center;
+  gap: 8px 24px;
+  padding: 10px 16px 0;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.station {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding-bottom: 10px;
+  flex-wrap: wrap;
+}
+.module {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--electric-text);
+}
+.stationName {
+  font-weight: 600;
+  color: var(--text);
+}
+.stationStatus {
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+}
+.tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 12px;
+  color: var(--text-muted);
+  font-size: 14.5px;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 8px 8px 0 0;
+  transition: color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+}
+.tab::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--electric);
+  transform: scaleX(0);
+  transition: transform 220ms var(--ease-out);
+}
+.tab[aria-current="page"] {
+  color: var(--text);
+}
+.tab[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .tab:not([aria-current="page"]):hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+}
+.tab:focus-visible {
+  outline: 2px solid var(--electric-text);
+  outline-offset: -2px;
+}
+
+.screen {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  outline: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(61, 123, 255, 0.07), transparent 70%),
+    var(--bg);
+}
+.content {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px 28px 48px;
+}
+
+/* --- cursor del computador (solo con puntero fino) ------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  .computer {
+    cursor:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M4 2.5v16.2l4.3-4.1 2.8 6.3 2.9-1.3-2.8-6.1h6z' fill='%235b8cff' stroke='%23050b18' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E")
+        4 2,
+      default;
+  }
+  .computer :is(a[href], button:not(:disabled), [role="tab"], summary, select, label, input[type="checkbox"], input[type="radio"]) {
+    cursor:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M4 2.5v16.2l4.3-4.1 2.8 6.3 2.9-1.3-2.8-6.1h6z' fill='%23e8eefc' stroke='%233d7bff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E")
+        4 2,
+      pointer;
+  }
+  .computer :is(input:not([type="checkbox"]):not([type="radio"]), textarea) {
+    cursor: text;
+  }
+  .computer button:disabled {
+    cursor: not-allowed;
+  }
+}
+.cursorLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cursorRing {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(91, 140, 255, 0.6);
+  opacity: 1;
+  transition:
+    opacity 160ms var(--ease-out),
+    scale 200ms var(--ease-out),
+    background-color 200ms var(--ease-out),
+    border-color 200ms var(--ease-out);
+}
+.cursorRing[data-mode="hover"] {
+  scale: 1.45;
+  background: rgba(91, 140, 255, 0.12);
+  border-color: rgba(91, 140, 255, 0.9);
+}
+.cursorRing[data-mode="hidden"] {
+  opacity: 0;
+}
+
+@media (max-width: 760px) {
+  .computer {
+    inset: 0;
+    border-radius: 0;
+    border: 0;
+  }
+  .bar {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  .crumbs li:nth-child(3),
+  .crumbs li:nth-child(4) {
+    display: none;
+  }
+  .tools {
+    width: 100%;
+    margin-left: 0;
+  }
+  .exit {
+    margin-left: auto;
+  }
+  .exitLong {
+    display: none;
+  }
+  .moduleBar {
+    padding: 8px 12px 0;
+  }
+  .content {
+    padding: 16px 14px 40px;
+  }
+}

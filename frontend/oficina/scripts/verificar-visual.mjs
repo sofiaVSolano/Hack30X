@@ -13,7 +13,10 @@ const require = createRequire(import.meta.url);
 const base = process.env.OFICINA_URL ?? "http://127.0.0.1:3000";
 const out = process.env.SALIDA ?? "verificacion";
 const mode = process.env.MODO === "simulated" ? "simulated" : "real";
-const routes = (process.env.RUTAS ?? "/,/tendencias,/oficina,/agentes,/ejecuciones,/programador,/temas,/metricas,/clasificaciones").split(",");
+const routes = (
+  process.env.RUTAS ??
+  "/,/oficina,/tendencias,/temas,/metricas,/clasificaciones,/coordinacion,/agentes,/ejecuciones,/programador,/puesto/analyst,/validar"
+).split(",");
 const viewports = [
   { name: "escritorio", width: 1440, height: 900 },
   { name: "movil", width: 390, height: 844 },
@@ -61,7 +64,7 @@ for (const viewport of viewports) {
     keyboard.ok = keyboard.primerFoco === "Saltar al contenido" && keyboard.visible && keyboard.anillo && keyboard.focoEnContenido;
     await page.goto(url); // sin el #contenido que añadió el Enter
     await settle(page);
-    const slug = route === "/" ? "portada" : route.slice(1);
+    const slug = route === "/" ? "portada" : route.slice(1).replaceAll("/", "-");
     const shot = join(out, `${viewport.name}-${mode}-${slug}.png`);
     await page.screenshot({ path: shot, fullPage: true });
 
@@ -80,12 +83,13 @@ for (const viewport of viewports) {
     await page.close();
   }
 
-  // Interacción: abrir el detalle de un agente desde la planta y cerrarlo con Escape.
-  if (routes.includes("/oficina")) {
+  // Interacción: abrir la ficha de un agente en el Centro de agentes y cerrarla con Escape
+  // (Escape cierra el diálogo y no saca del computador).
+  if (routes.includes("/coordinacion")) {
     const page = await context.newPage();
-    await page.goto(`${base}/oficina${mode === "simulated" ? "?modo=simulated" : ""}`);
+    await page.goto(`${base}/coordinacion${mode === "simulated" ? "?modo=simulated" : ""}`);
     await settle(page);
-    const station = page.getByRole("button", { name: /Ver detalle/ }).first();
+    const station = page.getByRole("list", { name: "Agentes registrados" }).getByRole("button").first();
     if (await station.count()) {
       await station.click();
       await page.getByRole("dialog").waitFor();
@@ -93,8 +97,9 @@ for (const viewport of viewports) {
       await page.screenshot({ path: join(out, `${viewport.name}-${mode}-detalle-agente.png`) });
       await page.keyboard.press("Escape");
       await page.getByRole("dialog").waitFor({ state: "hidden" });
-      const focusReturned = await page.evaluate(() => document.activeElement?.getAttribute("aria-label") ?? null);
-      report.pages.push({ viewport: viewport.name, route: "/oficina (detalle de agente)", focusReturned });
+      const focusReturned = await page.evaluate(() => document.activeElement?.textContent?.trim().slice(0, 60) ?? null);
+      const stillInComputer = new URL(page.url()).pathname === "/coordinacion";
+      report.pages.push({ viewport: viewport.name, route: "/coordinacion (ficha de agente)", focusReturned, stillInComputer });
     }
     await page.close();
   }

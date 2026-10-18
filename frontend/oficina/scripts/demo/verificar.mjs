@@ -64,12 +64,13 @@ function visualSweep(officeUrl, salida, mode) {
 async function recovery(officeUrl, salida, stopBackend, restartBackend) {
   const browser = await chromium.launch({ channel: "msedge", headless: true });
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: "reduce" });
-  const stations = page.getByRole("group", { name: "Estaciones de agentes" });
+  // El estado de los agentes se consulta en el computador del Centro de agentes.
+  const stations = page.getByRole("list", { name: "Agentes registrados" });
   const stale = page.getByText("No se pudo actualizar").first();
   const refresh = page.getByRole("button", { name: "Actualizar" });
   const result = {};
   try {
-    await page.goto(`${officeUrl}/oficina?modo=simulated`);
+    await page.goto(`${officeUrl}/coordinacion?modo=simulated`);
     await stations.waitFor({ state: "attached" });
     result.datosIniciales = await stations.getByRole("button").count();
 

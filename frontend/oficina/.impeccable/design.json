@@ -1,30 +1,34 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-17T20:30:00Z",
-  "title": "Design System: HACK 30X · DETECTAR",
+  "generatedAt": "2026-10-18T00:00:00Z",
+  "title": "Design System: HACK 30X · Oficina de tendencias",
   "extensions": {
     "colorMeta": {
-      "paper": { "role": "neutral", "displayName": "Papel de guía", "tonalRamp": ["#f8f4ea", "#f1ecdf", "#e9e2d2", "#ded5c2", "#d3c9b4", "#b5a98f"] },
-      "ink": { "role": "neutral", "displayName": "Tinta", "tonalRamp": ["#635b4e", "#4a443a", "#2a2620", "#16130f"] },
-      "signal-red": { "role": "primary", "displayName": "Rojo señal" },
-      "channel-blue": { "role": "secondary", "displayName": "Azul canal" },
-      "channel-yellow": { "role": "tertiary", "displayName": "Amarillo canal" }
+      "night": { "role": "neutral", "displayName": "Azul noche", "tonalRamp": ["#050b18", "#070d1c", "#0c1630", "#111e3f", "#172850", "#1e2f5a", "#2f467f"] },
+      "electric": { "role": "primary", "displayName": "Azul eléctrico", "tonalRamp": ["#2556c9", "#2f63e0", "#3d7bff", "#5b8cff", "#7ea6ff"] },
+      "lime": { "role": "secondary", "displayName": "Lima de señal" },
+      "text": { "role": "neutral", "displayName": "Texto", "tonalRamp": ["#8a99c0", "#a9b6d6", "#e8eefc"] }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display condensada", "purpose": "El nombre DETECTAR y la palabra gigante REGLAS; font-stretch 62%." },
-      "section": { "displayName": "Sección", "purpose": "Títulos de sección de la portada; font-stretch 62%." },
-      "heading": { "displayName": "Encabezado", "purpose": "Títulos de baldosa, filas y paneles; font-stretch 82%." }
+      "display": { "displayName": "Titular", "purpose": "Solo el titular de la portada." },
+      "page-title": { "displayName": "Título de vista", "purpose": "Título de cada sección dentro del computador." },
+      "data": { "displayName": "Datos", "purpose": "Cifras, identificadores y códigos de módulo (Geist Mono)." }
     },
-    "shadows": [],
+    "shadows": [
+      { "name": "floating", "value": "0 18px 40px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.3)", "purpose": "Etiquetas, diálogos y paneles flotantes." },
+      { "name": "computer", "value": "0 40px 90px rgba(0,0,0,0.6), 0 0 0 6px rgba(61,123,255,0.06)", "purpose": "Marco del computador sobre la oficina." }
+    ],
     "motion": [
-      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Entradas, pulsación y hover." },
-      { "name": "ease-drawer", "value": "cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "Persiana de la captura central y diálogo lateral." },
-      { "name": "press", "value": "transform: scale(0.97) 160ms", "purpose": "Respuesta al pulsar cualquier control." },
-      { "name": "rise", "value": "translateY(24px)→0 + opacity, ligado a view()", "purpose": "Entrada de las partes de cada sección al desplazarse." }
+      { "name": "camera-approach", "value": "transform 2200ms cubic-bezier(0.45, 0, 0.2, 1)", "purpose": "Acercamiento lento al plano medio del puesto." },
+      { "name": "camera-push", "value": "transform 1600ms cubic-bezier(0.55, 0, 0.25, 1)", "purpose": "Empuje lento hacia la pantalla, tras una pausa de 500 ms." },
+      { "name": "camera-pull-back", "value": "transform 1500ms cubic-bezier(0.3, 0, 0.15, 1)", "purpose": "Salida: más corta y sutil que la entrada." },
+      { "name": "screen-morph", "value": "view-transition-group(.pantalla) 1000ms cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "El monitor se convierte en el computador y vuelve." },
+      { "name": "tab", "value": "vt-fade 200ms + vt-rise 320ms", "purpose": "Cambio de sección dentro del computador." },
+      { "name": "press", "value": "transform: scale(0.97) 140ms", "purpose": "Respuesta al pulsar." }
     ],
     "breakpoints": [
-      { "name": "tablet", "value": "1100px" },
-      { "name": "phone", "value": "720px" }
+      { "name": "phone", "value": "760px" },
+      { "name": "tablet", "value": "900px" }
     ]
   },
   "components": [
@@ -32,45 +36,45 @@
       "name": "Botón principal",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Acción principal: abrir la oficina.",
-      "html": "<a class=\"ds-btn\" href=\"#\">Abrir la oficina →</a>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 26px;background:#d21f2b;color:#fff;border-radius:4px;font:800 22px/1 'Archivo Variable',sans-serif;font-stretch:82%;text-decoration:none;transition:transform 160ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}"
+      "description": "Acción principal: entrar a la oficina o volver a ella.",
+      "html": "<button class=\"ds-btn\">Entrar a la oficina →</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 20px;border:0;border-radius:12px;background:#2f63e0;color:#fff;font:600 16px 'Geist Variable',sans-serif;transition:transform 140ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:hover{background:#2556c9}"
     },
     {
-      "name": "Insignia de canal",
+      "name": "Etapa",
       "kind": "chip",
-      "refersTo": "channel-acelerando",
-      "description": "Etapa de un tema como número de canal.",
-      "html": "<span class=\"ds-ch a\">Acelerando</span> <span class=\"ds-ch e\">Emergente</span> <span class=\"ds-ch p\">Punto máximo</span>",
-      "css": ".ds-ch{display:inline-flex;padding:2px 8px;border-radius:2px;font:750 13px/1.5 'Archivo Variable',sans-serif;font-stretch:82%}.ds-ch.a{background:#d21f2b;color:#fff}.ds-ch.e{background:#1f56b3;color:#fff}.ds-ch.p{background:#f2c230;color:#16130f}"
+      "refersTo": "stage-acelerando",
+      "description": "Etapa de un tema; el lima solo para «acelerando».",
+      "html": "<span class=\"ds-st a\">Acelerando</span> <span class=\"ds-st e\">Emergente</span> <span class=\"ds-st p\">Punto máximo</span>",
+      "css": ".ds-st{display:inline-flex;padding:2px 9px;border-radius:999px;font:600 12.5px 'Geist Variable',sans-serif;border:1px solid transparent}.ds-st.a{background:#c6f432;color:#0b1400}.ds-st.e{background:#2f63e0;color:#fff}.ds-st.p{background:rgba(245,192,96,.16);border-color:rgba(245,192,96,.5);color:#f5c060}"
     },
     {
-      "name": "Ítem de navegación activo",
-      "kind": "nav",
-      "refersTo": "nav-item-active",
-      "description": "La sección actual se invierte a tinta.",
-      "html": "<nav class=\"ds-nav\"><a aria-current=\"page\">Tendencias</a><a>Oficina</a></nav>",
-      "css": ".ds-nav{display:grid;gap:4px;width:220px;font:500 16px 'Archivo Variable',sans-serif}.ds-nav a{padding:10px 14px;border-radius:4px;color:#16130f}.ds-nav a[aria-current]{background:#16130f;color:#f1ecdf}"
-    },
-    {
-      "name": "Fila de la parrilla",
+      "name": "Placa de sala",
       "kind": "custom",
-      "refersTo": "board-row-open",
-      "description": "Fila de tablero; la abierta pasa a rojo y muestra su evidencia.",
-      "html": "<ol class=\"ds-board\"><li class=\"open\">Keke palmer <span>Acelerando</span></li><li>Camioneta <span>Acelerando</span></li></ol>",
-      "css": ".ds-board{list-style:none;margin:0;padding:16px;display:grid;gap:4px;background:#16130f}.ds-board li{display:flex;justify-content:space-between;align-items:center;min-height:72px;padding:0 24px;background:#2a2620;color:#f1ecdf;border-radius:4px;font:800 22px 'Archivo Variable',sans-serif;font-stretch:82%}.ds-board li.open{background:#d21f2b;color:#fff;min-height:144px}"
+      "refersTo": "room-plaque",
+      "description": "Nombre y estado real de una sala, en el pasillo de la oficina.",
+      "html": "<button class=\"ds-pl\"><b>Sala de análisis</b><span><code>ENTENDER</code> · en preparación</span></button>",
+      "css": ".ds-pl{display:grid;gap:1px;padding:6px 10px;border-radius:10px;background:rgba(7,13,28,.88);border:1px solid #1e2f5a;color:#e8eefc;font:13.5px 'Geist Variable',sans-serif;text-align:left}.ds-pl span{font-size:12px;color:#a9b6d6}.ds-pl code{font:11.5px 'Geist Mono Variable',monospace}"
+    },
+    {
+      "name": "Pestañas del computador",
+      "kind": "nav",
+      "refersTo": "computer-tab-active",
+      "description": "Secciones del módulo dentro del computador.",
+      "html": "<nav class=\"ds-tabs\"><a aria-current=\"page\">Tendencias</a><a>Temas</a><a>Métricas</a></nav>",
+      "css": ".ds-tabs{display:flex;gap:4px;background:#050b18;border-bottom:1px solid #1c2c55}.ds-tabs a{position:relative;padding:12px;color:#a9b6d6;font:14.5px 'Geist Variable',sans-serif}.ds-tabs a[aria-current]{color:#e8eefc}.ds-tabs a[aria-current]::after{content:'';position:absolute;left:10px;right:10px;bottom:-1px;height:2px;background:#3d7bff}"
     }
   ],
   "narrative": {
-    "northStar": "La guía de programación",
-    "overview": "Las tendencias del día impresas como la parrilla de una revista de TV latinoamericana: papel, tinta y un rojo propio; azul y amarillo solo como insignias de canal. Lo seleccionado se invierte como el programa en emisión. Todo dato visible sale de la API.",
-    "keyCharacteristics": ["Archivo con eje de anchura, condensada para títulos", "Baldosas llenas con 8px de separación", "Inversión papel↔tinta para lo activo", "Sin sombras ni degradados", "Personitas pictograma que solo trabajan si la API lo dice"],
+    "northStar": "La oficina de tendencias",
+    "overview": "Una oficina tecnológica de noche en isométrico: cada puesto es un computador con la aplicación real de HACK 30X. La cámara se acerca al monitor elegido y la pantalla se convierte en la interfaz; toda actividad visible sale de la API.",
+    "keyCharacteristics": ["Azul noche con luz ambiental azul eléctrico", "Lima solo para señales reales", "Geist y Geist Mono", "Escena isométrica geométrica exacta", "Monitor que se transforma en el computador"],
     "rules": [
-      { "name": "La regla del canal", "body": "La etapa es una insignia llena con su nombre.", "section": "colors" },
-      { "name": "La regla de la fila en emisión", "body": "Lo seleccionado se invierte; nunca sombra.", "section": "elevation" },
-      { "name": "Blanco sobre rojo", "body": "El papel sobre rojo no llega a AA; en rojo el texto es blanco.", "section": "colors" }
+      { "name": "La regla de la señal lima", "body": "El lima solo marca «acelerando» o actividad registrada.", "section": "colors" },
+      { "name": "Nada encima de nada", "body": "Placas, etiquetas y paneles no tapan muebles ni puestos.", "section": "elevation" },
+      { "name": "Texto blanco sobre azul profundo", "body": "Texto blanco solo sobre #2f63e0 o más oscuro.", "section": "colors" }
     ],
-    "dos": ["Mostrar solo datos de la API y decir cuando faltan", "Usar capturas reales de la oficina", "Respetar prefers-reduced-motion"],
-    "donts": ["Animar actividad no registrada", "Degradados, sombras en reposo, vidrio", "Numerar filas o secciones"]
+    "dos": ["Mostrar solo lo que dice la API", "Animar con transform y opacity", "Respetar el movimiento reducido"],
+    "donts": ["Simular trabajo de agentes o módulos pendientes", "Usar el lima como decoración", "Neón, escaneos o partículas"]
   }
 }

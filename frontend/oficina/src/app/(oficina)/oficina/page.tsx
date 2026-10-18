@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 
-import { OfficeView } from "@/views/OfficeView";
+export const metadata: Metadata = { title: "Oficina · HACK 30X" };
 
-export const metadata: Metadata = { title: "Oficina de agentes · HACK 30X" };
-
+/** La vista general de la oficina la dibuja el layout; esta ruta no abre ningún computador. */
 export default function Page() {
-  return <OfficeView />;
+  return null;
 }

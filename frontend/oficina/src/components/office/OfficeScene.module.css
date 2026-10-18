@@ -1,0 +1,238 @@
+/* Oficina isométrica: azul noche, luz ambiental azul eléctrico, lima solo para actividad real. */
+.scene {
+  display: block;
+  overflow: visible;
+  user-select: none;
+}
+
+.pool {
+  fill: url(#ofi-pool);
+  opacity: 0.55;
+  pointer-events: none;
+}
+.pool[data-ready="true"] {
+  opacity: 1;
+}
+.glow {
+  fill: url(#ofi-glow);
+  pointer-events: none;
+}
+
+.zoneFloor {
+  transition: fill 220ms var(--ease-out), opacity 220ms var(--ease-out);
+}
+.scene[data-interactive="true"] .zoneFloor {
+  cursor: zoom-in;
+}
+.zoneFloor[data-hot="true"] {
+  fill: #172b5e;
+}
+.seams line {
+  stroke: #6f8fe0;
+  stroke-opacity: 0.07;
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+.window polygon {
+  fill: #0f2556;
+  stroke: #24376b;
+  stroke-width: 2;
+}
+.window line {
+  stroke: #24376b;
+  stroke-width: 2;
+}
+.door {
+  fill: #050a18;
+}
+.partition {
+  fill: #7aa2ff;
+  fill-opacity: 0.08;
+  stroke: #7aa2ff;
+  stroke-opacity: 0.22;
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+/* --- puestos --------------------------------------------------------------------------- */
+
+.station {
+  pointer-events: none;
+}
+.ring {
+  fill: #3d7bff;
+  fill-opacity: 0.1;
+  stroke: #5b8cff;
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 200ms var(--ease-out);
+}
+.station[data-hot="true"] .ring,
+.station[data-selected="true"] .ring {
+  opacity: 1;
+}
+/* Último puesto visitado: queda marcado al volver a la oficina. */
+.station[data-last="true"] .ring {
+  opacity: 0.8;
+  fill-opacity: 0.04;
+  stroke-dasharray: 5 4;
+}
+
+.frame {
+  fill: #070d1c;
+  stroke: #24376b;
+  stroke-width: 1;
+}
+.station[data-hot="true"] .frame,
+.station[data-selected="true"] .frame {
+  stroke: #5b8cff;
+  stroke-width: 1.5;
+}
+
+.glass {
+  fill: #0d1b3d;
+}
+.screen[data-state="vacante"] .glass {
+  fill: #060b18;
+}
+.screen[data-state="desconocido"] .glass {
+  fill: #0b1428;
+}
+.screen[data-state="consulta"] .glass {
+  fill: #0f2250;
+}
+.screen[data-state="trabajando"] .glass {
+  fill: #d8e5ff;
+}
+.station[data-hot="true"] .glass,
+.station[data-selected="true"] .glass {
+  stroke: #5b8cff;
+  stroke-width: 1;
+}
+
+.line {
+  fill: #1d3f99;
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: type 1.6s steps(6, end) infinite;
+}
+.line:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.line:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.glyph,
+.glyph circle,
+.glyph path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.glyph[data-tone="ok"] {
+  stroke: #6fe0a0;
+}
+.glyph[data-tone="danger"] {
+  stroke: #ff8a8a;
+}
+.glyph[data-tone="warn"],
+.glyph[data-tone="warn"] circle,
+.glyph[data-tone="warn"] path {
+  stroke: #f5b94a;
+}
+.glyph[data-tone="muted"] {
+  stroke: #8090b6;
+}
+.standby {
+  fill: #6c7fae;
+}
+.dotPending {
+  fill: #c6f432;
+}
+.icon {
+  fill: #5b8cff;
+  fill-opacity: 0.75;
+}
+.iconStroke {
+  stroke: #5b8cff;
+  stroke-opacity: 0.85;
+  fill: none;
+}
+.stageLime {
+  fill: #c6f432;
+}
+.stageBlue {
+  fill: #3d7bff;
+}
+.stageAmber {
+  fill: #f5b94a;
+}
+
+/* Al entrar: el monitor elegido se enciende con el mismo fondo y filo que el computador. */
+.glass {
+  transition:
+    fill 700ms cubic-bezier(0.45, 0, 0.15, 1),
+    stroke 700ms cubic-bezier(0.45, 0, 0.15, 1);
+}
+.station[data-lit="true"] .glass {
+  fill: #050b18;
+  stroke: #3d7bff;
+  stroke-width: 0.8;
+}
+.station[data-lit="true"] :is(.glyph, .standby, .dotPending, .code, .icon, .iconStroke) {
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+}
+
+/* Luz de actividad: lima, solo con una ejecución pendiente o en curso registrada. */
+.live {
+  fill: #c6f432;
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+.chair[data-vacant="true"] {
+  opacity: 0.55;
+}
+
+.typing {
+  animation: tap 0.42s ease-in-out infinite alternate;
+}
+
+@keyframes type {
+  from {
+    transform: scaleX(0.15);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes tap {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -1.5px;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Movimiento reducido: por preferencia del sistema (salvo que la persona elija «Completas»)
+   o porque la persona eligió «Reducidas» en la oficina. */
+@media (prefers-reduced-motion: reduce) {
+  :global(:root:not([data-motion="completo"])) .line,
+  :global(:root:not([data-motion="completo"])) .typing,
+  :global(:root:not([data-motion="completo"])) .live {
+    animation: none;
+  }
+}
+:global(:root[data-motion="reducido"]) .line,
+:global(:root[data-motion="reducido"]) .typing,
+:global(:root[data-motion="reducido"]) .live {
+  animation: none;
+}

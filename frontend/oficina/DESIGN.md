@@ -1,207 +1,231 @@
 ---
-name: HACK 30X · DETECTAR
-description: La programación de tendencias del día, impresa como una guía de TV latinoamericana.
+name: HACK 30X · Oficina de tendencias
+description: Una oficina tecnológica de noche, en isométrico, donde cada puesto es un computador con la aplicación real.
 colors:
-  paper: "#f1ecdf"
-  paper-raised: "#f8f4ea"
-  paper-2: "#e9e2d2"
-  paper-3: "#ded5c2"
-  rule: "#d3c9b4"
-  rule-strong: "#b5a98f"
-  ink: "#16130f"
-  ink-muted: "#4a443a"
-  ink-faint: "#635b4e"
-  wall: "#2a2620"
-  signal-red: "#d21f2b"
-  channel-blue: "#1f56b3"
-  channel-yellow: "#f2c230"
-  ok: "#136136"
-  warn: "#6f4500"
-  danger: "#b3261e"
-  simulated: "#6a3fa3"
+  night: "#070d1c"
+  surface: "#0c1630"
+  surface-2: "#111e3f"
+  surface-3: "#172850"
+  line: "#1e2f5a"
+  line-strong: "#2f467f"
+  text: "#e8eefc"
+  text-muted: "#a9b6d6"
+  text-faint: "#8a99c0"
+  electric: "#3d7bff"
+  electric-text: "#7ea6ff"
+  electric-fill: "#2f63e0"
+  electric-fill-hover: "#2556c9"
+  lime: "#c6f432"
+  lime-ink: "#0b1400"
+  ok: "#6fe0a0"
+  warn: "#f5c060"
+  danger: "#ff8f8f"
+  simulated: "#c4a6ff"
+  computer-night: "#050b18"
+  computer-bar: "#070f22"
+  computer-edge: "#22356b"
+  scene-floor: "#0a1430"
+  scene-wall: "#16254d"
+  scene-desk: "#2b3d6d"
 typography:
   display:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "clamp(76px, 15.5vw, 236px)"
-    fontWeight: 850
-    lineHeight: 0.8
-    letterSpacing: "-0.01em"
-  section:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "clamp(48px, 6.4vw, 104px)"
-    fontWeight: 850
-    lineHeight: 0.9
+    fontFamily: "Geist Variable, Geist, Segoe UI, system-ui, sans-serif"
+    fontSize: "clamp(42px, 5.6vw, 82px)"
+    fontWeight: 650
+    lineHeight: 1.02
+    letterSpacing: "-0.04em"
   page-title:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "clamp(34px, 4.4vw, 54px)"
-    fontWeight: 800
-    lineHeight: 1
+    fontFamily: "Geist Variable, Geist, Segoe UI, system-ui, sans-serif"
+    fontSize: "clamp(28px, 3.2vw, 40px)"
+    fontWeight: 650
+    lineHeight: 1.05
+    letterSpacing: "-0.03em"
   heading:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "22px"
-    fontWeight: 800
-    lineHeight: 1.1
-  body:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
+    fontFamily: "Geist Variable, Geist, Segoe UI, system-ui, sans-serif"
     fontSize: "18px"
+    fontWeight: 600
+    lineHeight: 1.15
+    letterSpacing: "-0.015em"
+  body:
+    fontFamily: "Geist Variable, Geist, Segoe UI, system-ui, sans-serif"
+    fontSize: "15.5px"
     fontWeight: 400
-    lineHeight: 1.5
+    lineHeight: 1.55
   small:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "16px"
+    fontFamily: "Geist Variable, Geist, Segoe UI, system-ui, sans-serif"
+    fontSize: "13px"
     fontWeight: 400
-    lineHeight: 1.4
-  code:
-    fontFamily: "JetBrains Mono Variable, ui-monospace, monospace"
-    fontSize: "14px"
-    fontWeight: 400
+    lineHeight: 1.45
+  data:
+    fontFamily: "Geist Mono Variable, Geist Mono, Cascadia Code, ui-monospace, monospace"
+    fontSize: "12.5px"
+    fontWeight: 500
     lineHeight: 1.4
 rounded:
-  sm: "4px"
-  md: "8px"
-  lg: "12px"
+  xs: "4px"
+  sm: "6px"
+  md: "10px"
+  lg: "14px"
+  frame: "16px"
+  pill: "999px"
 spacing:
-  tile-gap: "8px"
-  row-gap: "4px"
-  gutter: "clamp(16px, 2.4vw, 32px)"
+  xs: "4px"
+  sm: "8px"
+  md: "12px"
+  lg: "16px"
+  xl: "24px"
+  xxl: "32px"
 components:
   button-primary:
-    backgroundColor: "{colors.signal-red}"
+    backgroundColor: "{colors.electric-fill}"
     textColor: "#ffffff"
+    rounded: "{rounded.md}"
+    height: "38px"
+  button-primary-hover:
+    backgroundColor: "{colors.electric-fill-hover}"
+  button-secondary:
+    backgroundColor: "{colors.surface-2}"
+    textColor: "{colors.text}"
     rounded: "{rounded.sm}"
-  button-ink:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.sm}"
-    height: "56px"
-  channel-acelerando:
-    backgroundColor: "{colors.signal-red}"
+    height: "36px"
+  stage-acelerando:
+    backgroundColor: "{colors.lime}"
+    textColor: "{colors.lime-ink}"
+    rounded: "{rounded.pill}"
+  stage-emergente:
+    backgroundColor: "{colors.electric-fill}"
     textColor: "#ffffff"
-    rounded: "2px"
-  channel-emergente:
-    backgroundColor: "{colors.channel-blue}"
-    textColor: "#ffffff"
-    rounded: "2px"
-  channel-punto-maximo:
-    backgroundColor: "{colors.channel-yellow}"
-    textColor: "{colors.ink}"
-    rounded: "2px"
-  nav-item-active:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.sm}"
-  board-row:
-    backgroundColor: "{colors.wall}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.sm}"
-    height: "72px"
-  board-row-open:
-    backgroundColor: "{colors.signal-red}"
-    textColor: "#ffffff"
-    rounded: "{rounded.sm}"
+    rounded: "{rounded.pill}"
+  room-plaque:
+    backgroundColor: "{colors.night}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.md}"
+  computer-frame:
+    backgroundColor: "{colors.computer-night}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.frame}"
+  computer-tab-active:
+    textColor: "{colors.text}"
+    height: "42px"
 ---
 
-# Design System: HACK 30X · DETECTAR
+# Design System: HACK 30X · Oficina de tendencias
 
 ## Overview
 
-La guía de programación impresa. DETECTAR publica cada día qué temas crecen en América Latina y en
-qué momento está cada uno; el sistema lo trata como la parrilla de una revista de TV: papel, tinta,
-un rojo propio, y el azul y el amarillo solo como insignias de canal. La fila elegida se invierte
-(papel↔tinta, o rojo en la parrilla) igual que el programa que está «en emisión».
+HACK 30X es una oficina tecnológica de noche vista en isométrico. La portada presenta la idea en
+una frase y una acción («Entrar a la oficina»); la oficina es el mapa del producto: salas por
+módulo (DETECTAR, ENTENDER, CREAR, VALIDAR y la coordinación), puestos con computador y personas
+solo donde un agente tiene tarea. Al elegir un puesto la cámara se acerca al monitor y la pantalla
+se convierte en la aplicación real; «Volver a la oficina» deshace el camino.
 
-Dos modos conviven. La **portada** (`/`) persuade al jurado: bandas de color llenas, el nombre
-enorme, la parrilla real del día, capturas reales de la oficina. La **oficina** (`/tendencias`,
-`/oficina` y el resto) opera: misma tinta y papel, más contenida, densa y escaneable; la marca vive
-en los detalles (insignias de canal, ítem activo invertido, títulos condensados).
+Dos registros conviven: la oficina (exploración, ilustración geométrica exacta, luz ambiental azul)
+y el computador (trabajo: el mismo azul noche, más profundo y técnico, con navegación contextual).
 
-Regla de honestidad que el diseño no puede romper: todo número, etapa, umbral o estado de agente que
-se ve sale de la API. Las animaciones de actividad solo reflejan estados reales.
+Regla que el diseño no puede romper: toda actividad visible sale de la API. Una persona teclea y
+la luz lima se enciende solo con una ejecución pendiente o en curso registrada; un rol sin tarea es
+una silla vacía; un módulo sin implementar se presenta «en preparación», sin resultados simulados.
 
 ## Colors
 
 ### Primary
-- **Rojo señal** (`#d21f2b`): banda del nombre, acción principal, fila abierta de la parrilla, canal
-  «Acelerando», luz «al aire» de un agente que trabaja. Texto encima siempre en blanco (5,29:1); el
-  papel encima no llega a AA (4,48:1).
+- **Azul eléctrico** (`#3d7bff`): bordes de foco y selección, anillos de los puestos, subrayado de la
+  pestaña activa, luz ambiental. Como texto se usa su variante clara `#7ea6ff` (≥ 4,5:1 sobre la
+  noche); bajo texto blanco, la variante profunda `#2f63e0` (5,27:1).
 
 ### Secondary
-- **Azul canal** (`#1f56b3`) y **amarillo canal** (`#f2c230`): solo insignias de etapa («Emergente»,
-  «Punto máximo») y baldosas de color de la portada. Nunca texto corrido ni fondos de página.
+- **Lima** (`#c6f432`): solo señales importantes: la etapa «acelerando» y la luz de actividad real
+  de un puesto. Texto encima siempre `#0b1400`.
 
 ### Neutral
-- **Papel** (`#f1ecdf`) fondo; **papel 2/3** (`#e9e2d2`, `#ded5c2`) baldosas y paneles;
-  **tinta** (`#16130f`) texto y bloques invertidos; **pared** (`#2a2620`) filas de la parrilla y
-  pictogramas.
+- **Azul noche** `#070d1c` de fondo; superficies `#0c1630`, `#111e3f`, `#172850`; líneas `#1e2f5a`,
+  `#2f467f`. Texto `#e8eefc`, secundario `#a9b6d6`, terciario `#8a99c0`.
+- Estados (sobre la noche, todos ≥ 4,5:1): correcto `#6fe0a0`, aviso `#f5c060`, error `#ff8f8f`,
+  simulado `#c4a6ff`. Siempre con icono y texto.
 
 ### Named Rules
-- **La regla del canal.** El color de etapa es una insignia llena con su nombre, nunca un punto ni un
-  borde de color suelto.
-- **La regla de la fila en emisión.** Lo seleccionado se invierte; no se resalta con sombra ni con
-  un tono intermedio.
+- **La regla de la señal lima.** El lima no decora: aparece solo cuando hay algo que anticipar
+  (acelerando) o algo ocurriendo de verdad (ejecución en curso).
+- **La regla del texto sobre azul.** Texto blanco solo sobre `#2f63e0` o más profundo; el `#3d7bff`
+  lleno con texto blanco no llega a AA (3,84:1).
 
 ## Typography
 
-Una sola familia, Archivo Variable (Omnibus-Type, Buenos Aires), con su eje de anchura: condensada al
-62 % para el nombre y los títulos de sección, al 82 % para títulos y etiquetas, normal para el texto.
-JetBrains Mono solo para identificadores y código.
+Geist para todo y Geist Mono para cifras, identificadores, códigos de módulo y datos. Sin anchos
+condensados: la jerarquía viene del tamaño, el peso (400 / 600 / 650) y el interletrado negativo
+de los títulos (−0,03 a −0,04 em).
 
 ### Hierarchy
-- Display (nombre, palabra gigante): condensada 62 %, 850, interlineado 0,8.
-- Sección: condensada 62 %, 850, clamp(48px, 6,4vw, 104px).
-- Título de página de la oficina: condensada, 800, clamp(34px, 4,4vw, 54px).
-- Encabezado: condensada 82 %, 800, 22px.
-- Texto: 18px/1,5 en la portada; 16px en tablas de la oficina. Nada por debajo de 13px.
+- Titular de la portada: clamp(42px, 5,6vw, 82px), 650, interlineado 1,02.
+- Título de vista en el computador: clamp(28px, 3,2vw, 40px), 650.
+- Encabezado de panel: 18px, 600.
+- Texto: 15,5px/1,55; notas 13px. Nada por debajo de 11,5px (código de módulo en las placas).
 
 ## Layout
 
-Portada: rejilla de 12 columnas con separaciones de 8px entre baldosas llenas («el tablero bien
-llevado»); hero de raíles (datos a la izquierda, captura con su frase en el centro, cifras en vivo a
-la derecha y la baldosa roja de acción). En teléfono pasa a dos columnas con su propia composición.
-Oficina: barra lateral fija con el ítem activo invertido, contenido en paneles sobre papel.
+- **Portada:** dos columnas; la escena real de la oficina asoma por la derecha y se desvanece con
+  una máscara (sin franjas de color). En móvil, texto arriba y escena debajo.
+- **Oficina:** escenario a pantalla completa con cámara (traslación + escala calculadas desde las
+  coordenadas de cada puesto). HUD arriba; placas de sala en el pasillo, la única franja sin
+  muebles; al enfocar una sala, su panel se ancla a la izquierda de arriba abajo y la cámara
+  encuadra la sala en el espacio restante. En móvil, la escena encabeza y la lista de puestos es la
+  vía principal.
+- **Computador:** marco fijo a 12px del borde (pantalla completa en móvil): barra con ubicación,
+  modo de datos, sonido y «Volver a la oficina»; barra del módulo con sus secciones; contenido con
+  desplazamiento propio y ancho máximo de 1360px.
 
 ## Elevation & Depth
 
-Plano. Sin sombras en reposo y sin degradados: la profundidad viene de bloques de color llenos y de
-la inversión. El diálogo lateral se separa con un velo desenfocado sobre la página.
+La profundidad de la oficina es geométrica: cajas isométricas con tapa clara y cara derecha en
+sombra, sin texturas ni ruido. En la interfaz, una sombra suave por elemento flotante (etiquetas,
+panel, marco del computador) y nunca borde más sombra difusa en tarjetas.
+
+### Named Rules
+- **Nada encima de nada.** Placas, etiquetas y paneles no tapan muebles, puestos ni otras placas;
+  se comprueba con la prueba de solapes en el navegador a 1280, 1440 y 1920 px.
 
 ## Shapes
 
-Un solo radio: 4px en baldosas y botones (8px y 12px solo en paneles de la oficina). Las insignias de
-canal usan 2px, como un recuadro impreso.
+Radios de 4, 6, 10 y 14px; 16px solo para el marco del computador; píldoras para etapas e
+insignias. Las pantallas del mundo son paralelogramos isométricos exactos (pendiente ±0,5).
 
 ## Components
 
 ### Buttons
-Primario rojo con texto blanco; de tinta con texto papel. `:active` escala a 0,97; el hover solo
-existe con puntero fino.
+Primario azul profundo con texto blanco; secundario en superficie con borde. `:active` escala a
+0,97; hover solo con puntero fino.
 
 ### Chips
-Insignias de canal (`.channel[data-stage]`): rojo «Acelerando», azul «Emergente», amarillo «Punto
-máximo»; «Datos insuficientes» y «Saturada» solo con contorno.
+Etapa como píldora: «Acelerando» lima, «Emergente» azul profundo, «Punto máximo» ámbar con borde,
+«Datos insuficientes» solo con borde.
 
 ### Navigation
-Barra lateral de la oficina con marca roja; el ítem activo es un bloque de tinta con texto papel.
+Ubicación en migas (HACK 30X › Oficina › Sala › Computador › Módulo); secciones del módulo como
+pestañas con subrayado azul eléctrico.
 
-### La parrilla (componente propio)
-Filas de 72px sobre tinta con 4px entre ellas; la fila abierta pasa a rojo, crece y muestra la frase
-de su etapa, de dónde viene el tema y «Ver la evidencia». Un clic abre otra fila.
+### La oficina (componente propio)
+Escena SVG isométrica con salas, muros con ventanas, mamparas bajas de vidrio y pantallas de pared.
+Cada puesto es un botón con nombre y estado accesibles; al pasar o enfocar con teclado muestra su
+etiqueta (estado real y «Ficha del agente»). Estados de pantalla: completada, fallida, bloqueada,
+pendiente, en espera, desconocido (sin API), vacante y consulta.
 
-### La personita (componente propio)
-Pictograma de tinta de una persona en su escritorio, uno por agente. Teclea y enciende la luz «al
-aire» solo si la API dice que tiene una ejecución pendiente o en curso; si no, descansa y su pantalla
-muestra el último resultado; un rol sin tarea es una silla vacía con contorno discontinuo. Al hacer
-clic se abre la ficha del agente.
+### El computador (componente propio)
+Coreografía de cámara por planos: acercamiento lento a un plano medio del puesto (2,2 s), pausa en
+la que el monitor se enciende (0,5 s), empuje lento hacia la pantalla (1,6 s) y transición de vista
+compartida (`<ViewTransition name="pantalla-computador">`, 1 s) en la que la pantalla se endereza y
+crece hasta ser el computador mientras la interfaz pasa de borrosa a nítida. La salida es más corta
+y sutil (1 s + pausa + 1,5 s). Clic o Enter saltan la secuencia; Escape la cancela. Cursor propio
+solo dentro del computador y con puntero fino (flecha azul; flecha clara sobre controles; cursor de
+texto nativo en los campos) con un halo que crece sobre controles y late al hacer clic.
 
 ## Do's and Don'ts
 
 ### Do:
-- Mostrar solo cifras, etapas, umbrales y estados que devuelve la API, y decir cuando faltan.
-- Usar las capturas reales de la oficina como imágenes de la portada.
-- Entrar con movimiento solo con transform/opacity y respetar `prefers-reduced-motion`.
+- Mostrar solo estados, cifras y actividad que devuelve la API, y decir cuando no responde.
+- Mantener la cámara y las transiciones en `transform`/`opacity` y respetar `prefers-reduced-motion`.
+- Comprobar que nada se superpone tras cambiar la escena o las placas.
 
 ### Don't:
-- No animar actividad que la API no registra.
-- No usar degradados, sombras en reposo, vidrio ni etiquetas diminutas en mayúsculas sobre títulos.
-- No poner texto papel sobre rojo (4,48:1): en rojo, el texto es blanco.
-- No numerar filas ni secciones (01, 02…).
+- No simular trabajo de agentes ni resultados de ENTENDER, CREAR o VALIDAR.
+- No usar el lima como decoración ni texto blanco sobre `#3d7bff`.
+- No poner etiquetas pequeñas sobre los titulares, degradados de texto ni efectos de neón o escaneo.

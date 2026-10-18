@@ -172,20 +172,20 @@ function ClassificationCard({ item, name }: { item: Classification; name: string
       {open ? (
         <div className="stack">
           <div className="code-block">
-            <p className="eyebrow" style={{ marginBottom: 6 }}>
+            <p className="code-block__title">
               explicacion
             </p>
             <Structured value={item.explicacion} />
           </div>
           <div className="code-block">
-            <p className="eyebrow" style={{ marginBottom: 6 }}>
+            <p className="code-block__title">
               metricas_consideradas ({item.metricas_consideradas.length})
             </p>
             <Structured value={item.metricas_consideradas} />
           </div>
           {item.evidencia.some((e) => e.ambitos.length) ? (
             <div className="code-block">
-              <p className="eyebrow" style={{ marginBottom: 6 }}>
+              <p className="code-block__title">
                 ámbitos por fuente
               </p>
               <Structured value={Object.fromEntries(item.evidencia.map((e) => [e.fuente, e.ambitos]))} />

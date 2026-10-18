@@ -120,7 +120,7 @@ Resultados en la entrega:
 
 | Tema | Documento |
 |---|---|
-| Diseño de la oficina | `docs/e13-diseno.md` y `docs/e15-diseno-visual.md` (skills de diseño aplicadas) |
+| Diseño de la oficina | `docs/e16-oficina-inmersiva.md` (vigente), `DESIGN.md`; historia en `docs/e13-diseno.md` y `docs/e15-diseno-visual.md` |
 | Seguridad del acceso | `docs/e14-seguridad-acceso.md` |
 | Estado y riesgos | `docs/cierre-detectar.md` |
 | Contrato con ENTENDER | `backend/app/modules/detectar/docs/contrato-detectar-v0-revision.md` (propuesta, con estado de implementación) |

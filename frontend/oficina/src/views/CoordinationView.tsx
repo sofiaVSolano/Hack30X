@@ -5,9 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { AgentDrawer } from "@/components/agents/AgentPanels";
-import { OfficeFloor } from "@/components/agents/OfficeFloor";
 import { SchedulerSummary } from "@/components/scheduler/SchedulerSummary";
-import { Badge, CalibrationBadge, ModeBadge, RunStatusBadge, StageBadge } from "@/components/ui/Badges";
+import { ActivityBadge, Badge, CalibrationBadge, ModeBadge, RunStatusBadge, StageBadge } from "@/components/ui/Badges";
 import { InfoTip } from "@/components/ui/InfoTip";
 import { EmptyState, QueryView, RefreshControl } from "@/components/ui/States";
 import { Day, Time } from "@/components/ui/Time";
@@ -26,7 +25,7 @@ import { useDataMode, useModeHref } from "@/hooks/useDataMode";
 import { label, SOURCE } from "@/lib/labels";
 import type { Agent } from "@/lib/schemas";
 
-import styles from "./OfficeView.module.css";
+import styles from "./CoordinationView.module.css";
 
 function Kpi({ value, label: text, hint }: { value: number | string; label: string; hint: string }) {
   return (
@@ -39,7 +38,8 @@ function Kpi({ value, label: text, hint }: { value: number | string; label: stri
   );
 }
 
-export function OfficeView() {
+/** Centro de agentes (computador del Supervisor): estado real de agentes, programador y datos. */
+export function CoordinationView() {
   const mode = useDataMode();
   const href = useModeHref();
   const agents = useAgents(mode, OPERATIONAL_POLL_MS);
@@ -56,10 +56,10 @@ export function OfficeView() {
     <>
       <header className="page-head">
         <div>
-          <h1 className="page-title">Oficina de agentes</h1>
+          <h1 className="page-title">Centro de agentes</h1>
           <p className="page-lede">
-            Cada agente tiene su puesto. Solo trabaja en pantalla cuando la API registra una ejecución pendiente o en
-            curso; el resto del tiempo el puesto muestra su último resultado. Modo <ModeBadge mode={mode} />.
+            Estado registrado de los seis agentes, del programador y de los datos de DETECTAR. Un agente solo cuenta como
+            activo si la API registra una ejecución pendiente o en curso. Modo <ModeBadge mode={mode} />.
           </p>
         </div>
         <RefreshControl queries={[agents, scheduler, classifications, topics, metrics]} />
@@ -67,7 +67,7 @@ export function OfficeView() {
 
       <section aria-labelledby="planta" className="stack" style={{ marginBottom: 24 }}>
         <h2 id="planta" className="visually-hidden">
-          Planta de la oficina
+          Agentes registrados
         </h2>
         <QueryView query={agents} skeletonLines={6}>
           {(data) => {
@@ -75,8 +75,21 @@ export function OfficeView() {
             const count = (fn: (a: Agent) => boolean) => list.filter(fn).length;
             return (
               <>
-                <OfficeFloor agents={list} onSelect={setSelected} scheduler={scheduler.data} />
-                <div className={styles.kpis} aria-label="Leyenda y conteo de la planta" role="group">
+                <ul className={styles.agents} aria-label="Agentes registrados">
+                  {list.map((agent) => (
+                    <li key={agent.id}>
+                      <button type="button" className={styles.agent} onClick={() => setSelected(agent)}>
+                        <span className={styles.agentName}>{agent.nombre}</span>
+                        <span className="mono small faint" translate="no">
+                          {agent.id}
+                        </span>
+                        <ActivityBadge activity={agent.actividad} />
+                        {!agent.implementado ? <span className="small muted">Sin tarea implementada</span> : null}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+                <div className={styles.kpis} aria-label="Conteo de agentes" role="group">
                   <Kpi value={count((a) => a.definido)} label="Definidos" hint="Agentes en el registro declarativo." />
                   <Kpi value={count((a) => a.implementado)} label="Con tarea" hint="implementado = true: su tarea está disponible." />
                   <Kpi

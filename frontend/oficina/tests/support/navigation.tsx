@@ -24,8 +24,22 @@ vi.mock("next/navigation", () => ({
 }));
 
 vi.mock("next/link", () => ({
-  default: ({ href, children, ...rest }: { href: string; children: ReactNode }) => (
-    <a href={href} {...rest}>
+  // Las props propias de Next (tipos de transición, precarga, desplazamiento) no llegan al <a>.
+  default: ({
+    href,
+    children,
+    transitionTypes,
+    prefetch: _prefetch,
+    scroll: _scroll,
+    ...rest
+  }: {
+    href: string;
+    children: ReactNode;
+    transitionTypes?: string[];
+    prefetch?: boolean;
+    scroll?: boolean;
+  }) => (
+    <a href={href} data-transition-types={transitionTypes?.join(" ")} {...rest}>
       {children}
     </a>
   ),

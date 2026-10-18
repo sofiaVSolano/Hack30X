@@ -12,7 +12,6 @@ import { formatMinutes } from "@/lib/format";
 import { ASSIGNMENT, IMPLEMENTATION, label, RUN_STATUS, SCOPE, SOURCE } from "@/lib/labels";
 import { AGENT_RUN_STATUSES, type Agent, type AgentRun, type AgentRunStatus, type DataMode } from "@/lib/schemas";
 
-import { Desk } from "./Desk";
 import { RunDetail } from "./RunDetail";
 import { RunsTable } from "./RunsTable";
 
@@ -32,20 +31,16 @@ export function AgentCard({ agent, onOpen }: { agent: Agent; onOpen: (agent: Age
   const last = agent.ultima_ejecucion;
   return (
     <article className="panel stack" aria-labelledby={`agente-${agent.id}`} style={{ gap: 14 }}>
-      <div className="row" style={{ justifyContent: "space-between" }}>
-        <span className="eyebrow">Módulo {label(SCOPE, agent.alcance)}</span>
-        <ImplementationBadge agent={agent} />
-      </div>
-      <div className="row" style={{ justifyContent: "space-between", flexWrap: "nowrap", alignItems: "flex-start" }}>
+      <div className="row" style={{ justifyContent: "space-between", alignItems: "flex-start" }}>
         <div style={{ minWidth: 0 }}>
           <h3 id={`agente-${agent.id}`} style={{ fontSize: 18 }}>
             {agent.nombre}
           </h3>
           <p className="faint small mono" translate="no">
-            {agent.id}
+            {agent.id} · {label(SCOPE, agent.alcance)}
           </p>
         </div>
-        <Desk who={agent.id} activity={agent.actividad} implemented={agent.implementado} size={92} />
+        <ImplementationBadge agent={agent} />
       </div>
       <p className="muted small">{agent.descripcion}</p>
       <dl className="dl small">
@@ -142,23 +137,10 @@ export function AgentHistory({ agentId, mode, limit = 20 }: { agentId: string; m
   );
 }
 
-export function AgentDrawer({ agent, mode, onClose }: { agent: Agent | null; mode: DataMode; onClose: () => void }) {
+/** Ficha completa de un agente (datos de la API) con su historial de ejecuciones. */
+export function AgentDetails({ agent, mode }: { agent: Agent; mode: DataMode }) {
   return (
-    <Dialog
-      open={agent !== null}
-      onClose={onClose}
-      title={agent?.nombre ?? ""}
-      subtitle={
-        agent ? (
-          <span className="row">
-            <span className="mono">{agent.id}</span>
-            <ModeBadge mode={mode} />
-          </span>
-        ) : null
-      }
-    >
-      {agent ? (
-        <>
+    <>
           <div className="row">
             <ImplementationBadge agent={agent} />
             <ActivityBadge activity={agent.actividad} />
@@ -210,8 +192,26 @@ export function AgentDrawer({ agent, mode, onClose }: { agent: Agent | null; mod
             <h3 className="panel__title">Historial de ejecuciones</h3>
             <AgentHistory agentId={agent.id} mode={mode} />
           </section>
-        </>
-      ) : null}
+    </>
+  );
+}
+
+export function AgentDrawer({ agent, mode, onClose }: { agent: Agent | null; mode: DataMode; onClose: () => void }) {
+  return (
+    <Dialog
+      open={agent !== null}
+      onClose={onClose}
+      title={agent?.nombre ?? ""}
+      subtitle={
+        agent ? (
+          <span className="row">
+            <span className="mono">{agent.id}</span>
+            <ModeBadge mode={mode} />
+          </span>
+        ) : null
+      }
+    >
+      {agent ? <AgentDetails agent={agent} mode={mode} /> : null}
     </Dialog>
   );
 }

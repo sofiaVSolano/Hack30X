@@ -11,8 +11,10 @@ web
 - **Oficina (aplicación):** quien opera DETECTAR en HACK 30X. Revisa qué temas están creciendo y
   en qué etapa están, para pasarlos al siguiente módulo (ENTENDER). La persona usuaria encontró la
   primera versión poco intuitiva: necesita entender el resultado de un vistazo, en lenguaje simple.
-- **Landing page:** el **jurado / evaluadores de HACK 30X**. Necesitan entender qué hace DETECTAR,
-  cómo funciona y comprobarlo abriendo la oficina.
+- **Portada:** el **jurado / evaluadores de HACK 30X** y quien llega por primera vez. Necesitan
+  entender la propuesta en una frase y entrar a la oficina; sin indicadores operativos antes de entrar.
+- **Oficina inmersiva:** se recorre como un espacio (salas por módulo, puestos con computador) y cada
+  computador abre la aplicación real de su módulo.
 
 ## Product Purpose
 
@@ -49,7 +51,9 @@ puntuaciones de confianza, saturación ni oportunidad.
 
 ## Brand Commitments
 
-- Nombre: **HACK 30X**. Módulo: **DETECTAR**. Concepto existente: «oficina de agentes».
+- Nombre: **HACK 30X**. Módulo: **DETECTAR**. Concepto: «oficina de agentes» en isométrico, de noche;
+  azul noche, azul eléctrico para lo interactivo y lima solo para señales importantes (fijado por la
+  persona usuaria en E16).
 
 ## Evidence on Hand
 

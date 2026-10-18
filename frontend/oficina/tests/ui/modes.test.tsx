@@ -8,7 +8,8 @@ import { clearTopicNameCache } from "@/hooks/queries";
 import { AgentsView } from "@/views/AgentsView";
 import { ClassificationsView } from "@/views/ClassificationsView";
 import { MetricsView } from "@/views/MetricsView";
-import { OfficeView } from "@/views/OfficeView";
+import { CoordinationView } from "@/views/CoordinationView";
+import { StationView, ValidationView } from "@/views/StationView";
 import { RunsView } from "@/views/RunsView";
 import { SchedulerView } from "@/views/SchedulerView";
 import { TopicsView } from "@/views/TopicsView";
@@ -37,7 +38,9 @@ function routes(mode: "real" | "simulated") {
 
 const VIEWS: [string, string, () => ReactElement][] = [
   ["Tendencias", "/tendencias", () => <TrendsView />],
-  ["Oficina", "/oficina", () => <OfficeView />],
+  ["Centro de agentes", "/coordinacion", () => <CoordinationView />],
+  ["Puesto de agente", "/puesto/trend_hunter", () => <StationView agentId="trend_hunter" />],
+  ["Sala de validación", "/validar", () => <ValidationView />],
   ["Agentes", "/agentes", () => <AgentsView />],
   ["Ejecuciones", "/ejecuciones", () => <RunsView />],
   ["Programador", "/programador", () => <SchedulerView />],

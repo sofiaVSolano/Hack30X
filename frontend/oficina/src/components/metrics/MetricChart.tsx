@@ -7,7 +7,8 @@ import type { ScopeSeries } from "@/lib/series";
 
 import styles from "./MetricChart.module.css";
 
-const COLORS = ["#d21f2b", "#1f56b3", "#8a5600", "#6a3fa3", "#1b7a47", "#16130f"];
+// Series sobre el fondo azul noche: todas con contraste ≥ 4,5:1; el lima se reserva a las señales.
+const COLORS = ["#7ea6ff", "#f5c060", "#6fe0a0", "#c4a6ff", "#ff8f8f", "#e8eefc"];
 // Además del color, cada ámbito tiene su trazo (accesible sin color y en blanco y negro).
 const DASHES = ["", "6 4", "2 4", "10 4 2 4", "1 3", "14 6"];
 const W = 720;

@@ -45,21 +45,32 @@ Viene **apagado** por seguridad.
 
 ## La oficina de agentes
 
-Es la página web que se abre en `http://127.0.0.1:3000`. La **portada** (`/`) presenta DETECTAR al
-jurado como una guía de programación de TV impresa: la parrilla real del día (temas y etapa), las
-reglas con sus umbrales reales, los seis agentes con su estado real y el botón «Abrir la oficina».
-Solo lee datos reales; si no hay, lo dice. Dentro de la oficina están estas secciones:
+Es la página web que se abre en `http://127.0.0.1:3000`:
 
-| Sección | Qué se ve |
+1. **Portada** (`/`): una frase, «Las tendencias no esperan. Anticípate.», y el botón «Entrar a la
+   oficina». La ilustración es la propia oficina con el estado real de los agentes.
+2. **Oficina** (`/oficina`): una oficina tecnológica de noche en perspectiva isométrica con cinco
+   salas: Sala de tendencias (DETECTAR), Sala de análisis (ENTENDER), Estudio creativo (CREAR),
+   Sala de validación (VALIDAR) y Centro de agentes (coordinación). Solo DETECTAR y la coordinación
+   funcionan; las demás aparecen «en preparación» y no muestran resultados inventados.
+3. **Computadores:** al hacer clic en una persona o en una pantalla, la cámara se acerca al monitor
+   y la pantalla se convierte en la aplicación real de ese puesto (con su propio cursor y su
+   navegación). «Volver a la oficina» (o Escape) hace el camino de vuelta y deja marcado el puesto.
+   En el móvil, la lista «Puestos de la oficina» permite entrar sin hacer zoom.
+
+Las personas solo aparecen en los puestos de agentes con tarea implementada; teclean, con la luz
+lima encendida, únicamente si la API registra una ejecución pendiente o en curso. El sonido al
+entrar y salir está apagado por defecto (botón del altavoz).
+
+| Puesto (computador) | Qué se ve |
 |---|---|
-| **Tendencias** (`/tendencias`) | Lo más importante, en lenguaje simple: los temas que la gente busca hoy, agrupados por etapa («Creciendo cada vez más rápido», «Empezando a crecer», «En su punto más alto»), con sus visitas reales en Wikipedia y cuánto crecieron. Los temas sin etapa clara explican por qué (por ejemplo, «sus visitas están bajando») |
-| **Oficina** (`/oficina`) | Un plano de oficina con salas y una personita en su escritorio por agente. Si un agente está trabajando de verdad, teclea, su pantalla se enciende y la luz «al aire» se pone roja; si no, descansa y su pantalla muestra el último resultado; un rol sin tarea aparece como silla vacía. Al hacer clic en una personita se abre su ficha: descripción, responsabilidad, fuentes, herramientas, frecuencia, preguntas abiertas e historial |
-| **Agentes** | La ficha de cada agente |
-| **Ejecuciones** | El historial de lo que ha hecho cada agente |
-| **Programador** | Si el trabajo automático está encendido o apagado, y por qué |
-| **Temas** | Los temas detectados |
-| **Métricas** | Gráficas de cómo evoluciona cada tema |
-| **Clasificaciones** | La etapa de cada tema y qué fuente la respalda |
+| **Tendencias** (`/tendencias`, puesto del Cazador de tendencias) | Lo más importante, en lenguaje simple: los temas que la gente busca hoy, agrupados por etapa («Creciendo cada vez más rápido», «Empezando a crecer», «En su punto más alto»), con sus visitas reales en Wikipedia y cuánto crecieron. Los temas sin etapa clara explican por qué (por ejemplo, «sus visitas están bajando») |
+| **Temas** (`/temas`, pantalla de pared de DETECTAR) | Los temas detectados |
+| **Métricas** (`/metricas`, pantalla de pared) | Gráficas de cómo evoluciona cada tema |
+| **Clasificaciones y evidencias** (`/clasificaciones`, pantalla de pared) | La etapa de cada tema y qué fuente la respalda |
+| **Centro de agentes** (`/coordinacion`, puesto del Supervisor) | Estado de los seis agentes, última ejecución, programador y datos; con pestañas **Ejecuciones**, **Agentes** y **Programador** |
+| **Puesto de un agente** (`/puesto/<id>`) | Su ficha real (responsabilidad, fuentes, herramientas, preguntas abiertas) y su historial; si su módulo no existe aún, lo dice |
+| **Sala de validación** (`/validar`) | VALIDAR en preparación y los agentes que tiene asignados según la API (hoy, ninguno) |
 
 ## Tendencias reales
 

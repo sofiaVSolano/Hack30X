@@ -1,4 +1,4 @@
-/* Leyenda de la planta: cada conteo explica un estado visible de los puestos. */
+/* Conteos: cada uno explica un estado registrado de los agentes. */
 .kpis {
   display: flex;
   flex-wrap: wrap;
@@ -94,4 +94,45 @@
   .limitList {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* Agentes: cada uno abre su ficha y su historial. */
+.agents {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+  gap: 8px;
+}
+.agent {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: border-color 160ms var(--ease-out), background-color 160ms var(--ease-out), transform 140ms var(--ease-out);
+}
+.agent:active {
+  transform: scale(0.98);
+}
+.agent:focus-visible {
+  box-shadow: var(--focus);
+}
+@media (hover: hover) and (pointer: fine) {
+  .agent:hover {
+    border-color: var(--electric);
+    background: var(--surface-2);
+  }
+}
+.agentName {
+  font-weight: 600;
+  color: var(--text);
 }

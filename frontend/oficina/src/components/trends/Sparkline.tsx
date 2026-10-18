@@ -23,13 +23,13 @@ export function Sparkline({ segments, width = 132, height = 36 }: { segments: Se
             key={s[0]!.date}
             points={s.map((p) => `${x(p.date)},${y(p.value)}`).join(" ")}
             fill="none"
-            stroke="var(--signal)"
+            stroke="var(--electric-text)"
             strokeWidth="2"
             strokeLinejoin="round"
             strokeLinecap="round"
           />
         ))}
-      <circle cx={x(last.date)} cy={y(last.value)} r="3" fill="var(--signal)" />
+      <circle cx={x(last.date)} cy={y(last.value)} r="3" fill="var(--electric-text)" />
     </svg>
   );
 }

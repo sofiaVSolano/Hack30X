@@ -1,0 +1,722 @@
+/* Oficina: escenario a pantalla completa, cámara sobre el mundo isométrico y capas de interfaz. */
+.root {
+  min-height: 100svh;
+  background: var(--bg);
+}
+
+.stage {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 42%, rgba(61, 123, 255, 0.1), transparent 70%),
+    var(--bg);
+}
+/* Mientras la cámara se acerca, la oficina se oscurece poco a poco alrededor del puesto, y sigue
+   oscurecida detrás del computador. Al volver, se aclara despacio. */
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse 45% 50% at 50% 50%, rgba(3, 6, 14, 0.25), rgba(3, 6, 14, 0.62));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 3200ms cubic-bezier(0.45, 0, 0.15, 1);
+}
+.root[data-entering="true"] .stage::after,
+.root[data-view="computador"] .stage::after {
+  opacity: 1;
+}
+/* La interfaz de la oficina se retira durante el acercamiento, no de golpe al final. */
+.hud,
+.legend,
+.zonePanel,
+.alert {
+  transition: opacity 500ms var(--ease-out);
+}
+.root[data-entering="true"] .hud,
+.root[data-entering="true"] .legend,
+.root[data-entering="true"] .zonePanel,
+.root[data-entering="true"] .alert {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Entrada a la oficina (desde la portada o un enlace): aparece con un leve acercamiento. */
+.stage > .world {
+  animation: office-in 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes office-in {
+  from {
+    opacity: 0;
+  }
+}
+/* La duración y la curva de cada movimiento de cámara las fija la coreografía (estilo en línea). */
+.world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+}
+/* Aviso discreto mientras la cámara entra. */
+.entryHint {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 8;
+  translate: -50% 0;
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(7, 13, 28, 0.82);
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+  font-size: 13px;
+  white-space: nowrap;
+  animation: hint-in 700ms var(--ease-out) 1400ms both;
+}
+.entryHint kbd {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+}
+@keyframes hint-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.world[data-instant="true"] {
+  transition: none;
+}
+
+/* Pantalla del puesto enfocado: se enciende al final del acercamiento con el mismo fondo y
+   filo que el computador, para que el paso a la interfaz sea continuo. Va en su propia capa, en
+   coordenadas de pantalla, por encima del oscurecido. */
+.screenLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.screenOverlay {
+  position: absolute;
+  transform-origin: 0 0;
+  border-radius: 3px;
+  background: #050b18;
+  box-shadow:
+    inset 0 0 0 1px #3d7bff,
+    0 0 28px rgba(61, 123, 255, 0.45);
+  opacity: 0;
+}
+/* Al entrar: aparece cuando el empuje casi ha llegado (es idéntica al monitor ya encendido). */
+.screenOverlay[data-on="entrando"] {
+  animation: screen-on 500ms cubic-bezier(0.22, 1, 0.36, 1) 2200ms both;
+}
+.screenOverlay[data-on="directo"] {
+  animation: screen-on 180ms ease-out 260ms both;
+}
+/* Al volver: es el destino de la transición (visible desde el principio) y se apaga al alejarse. */
+.screenOverlay[data-on="volviendo"] {
+  opacity: 1;
+  animation: screen-off 600ms ease-out 1600ms both;
+}
+@keyframes screen-on {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes screen-off {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+
+/* --- puestos y placas ------------------------------------------------------------------ */
+
+.hotspots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.spot {
+  position: absolute;
+  pointer-events: auto;
+}
+.spotBtn {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  cursor: zoom-in;
+  border-radius: 6px;
+}
+.spotBtn:focus-visible {
+  outline: 2px solid var(--electric-text);
+  outline-offset: 2px;
+}
+
+.tagAnchor {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 160ms var(--ease-out), visibility 0s linear 160ms;
+}
+.tagAnchor[data-shown="true"],
+.spot:has(:focus-visible) .tagAnchor {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 160ms var(--ease-out), visibility 0s;
+}
+.tag {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform-origin: 0 100%;
+  transition: transform 1300ms cubic-bezier(0.45, 0, 0.15, 1);
+  display: grid;
+  gap: 2px;
+  min-width: 190px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(10, 20, 48, 0.94);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+.world[data-instant="true"] .tag,
+.world[data-instant="true"] .plaque {
+  transition: none;
+}
+.tagTitle {
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--text);
+}
+.tagStatus {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.tagStatus[data-state="trabajando"] {
+  color: var(--lime);
+}
+.tagHint {
+  font-size: 12.5px;
+  color: var(--electric-text);
+}
+.tagLink {
+  all: unset;
+  justify-self: start;
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.tagLink:focus-visible {
+  outline: 2px solid var(--electric-text);
+  outline-offset: 2px;
+}
+
+.plaqueAnchor {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.plaque {
+  all: unset;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  transition:
+    transform 1300ms cubic-bezier(0.45, 0, 0.15, 1),
+    background-color 160ms var(--ease-out),
+    border-color 160ms var(--ease-out);
+  display: grid;
+  gap: 1px;
+  width: max-content;
+  padding: 6px 10px;
+  white-space: nowrap;
+  border-radius: 10px;
+  background: rgba(7, 13, 28, 0.88);
+  border: 1px solid var(--line);
+  cursor: zoom-in;
+  text-align: left;
+  /* Aparecen cuando la cámara ya está en la vista general (no gigantes durante el alejamiento). */
+  animation: plaque-in 500ms var(--ease-out) 2300ms both;
+}
+@keyframes plaque-in {
+  from {
+    opacity: 0;
+  }
+}
+.plaque:focus-visible {
+  outline: 2px solid var(--electric-text);
+  outline-offset: 2px;
+}
+.plaque[data-active="true"] {
+  border-color: var(--electric);
+  background: rgba(13, 27, 64, 0.94);
+}
+@media (hover: hover) and (pointer: fine) {
+  .plaque:hover {
+    border-color: var(--electric);
+  }
+}
+.plaqueName {
+  font-weight: 600;
+  font-size: 13.5px;
+  line-height: 1.25;
+  color: var(--text);
+}
+.plaqueModule {
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+.plaqueCode {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+.plaqueModule[data-ready="true"] {
+  color: var(--electric-text);
+}
+
+/* --- interfaz de la oficina ------------------------------------------------------------ */
+
+.hud {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 14px;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  border-radius: 8px;
+}
+.crumbs ol {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.crumbs li + li::before {
+  content: "›";
+  margin-right: 8px;
+  color: var(--text-faint);
+}
+.crumbs [aria-current="page"] {
+  color: var(--text);
+}
+.crumbBtn {
+  all: unset;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-radius: 4px;
+}
+.crumbBtn:hover {
+  color: var(--text);
+}
+.crumbBtn:focus-visible {
+  outline: 2px solid var(--electric-text);
+  outline-offset: 2px;
+}
+.tools {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.iconBtn {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), transform 140ms var(--ease-out);
+}
+.motionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), transform 140ms var(--ease-out);
+}
+.motionBtn[aria-pressed="true"] {
+  color: var(--electric-text);
+  border-color: var(--electric);
+}
+.motionBtn:active {
+  transform: scale(0.97);
+}
+@media (hover: hover) and (pointer: fine) {
+  .motionBtn:hover {
+    color: var(--text);
+    background: var(--surface-3);
+  }
+}
+@media (max-width: 760px) {
+  .motionBtn span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+}
+.iconBtn[aria-pressed="true"] {
+  color: var(--electric-text);
+  border-color: var(--electric);
+}
+.iconBtn:active {
+  transform: scale(0.95);
+}
+@media (hover: hover) and (pointer: fine) {
+  .iconBtn:hover {
+    color: var(--text);
+    background: var(--surface-3);
+  }
+}
+
+.alert {
+  position: absolute;
+  left: 16px;
+  top: 64px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(680px, calc(100% - 32px));
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-line);
+  color: var(--text);
+  font-size: 13.5px;
+}
+.alert svg {
+  flex: none;
+  color: var(--danger);
+}
+.alertBtn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.zonePanel,
+.legend {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 5;
+  width: min(380px, calc(100% - 32px));
+  border-radius: 16px;
+  background: rgba(8, 15, 34, 0.94);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+}
+/* Panel de la sala: columna anclada a la izquierda, de arriba abajo. La cámara encuadra la sala
+   en el espacio que queda a su derecha, así que el panel no tapa la sala elegida. */
+.zonePanel {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 400px;
+  overflow-y: auto;
+  padding: 88px 22px 22px;
+  border-radius: 0;
+  border: 0;
+  border-right: 1px solid var(--line);
+  background: var(--bg);
+  box-shadow: 24px 0 48px rgba(0, 0, 0, 0.35);
+  animation: panel-in 320ms var(--ease-out) both;
+}
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+}
+.zoneTitle {
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+.zoneModule {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.zoneModule[data-ready="true"] {
+  color: var(--electric-text);
+}
+.zonePurpose {
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 14.5px;
+}
+.zoneList,
+.directoryZone ul {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.zoneItem,
+.directoryItem {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: 14.5px;
+  cursor: zoom-in;
+  transition: border-color 160ms var(--ease-out), background-color 160ms var(--ease-out), transform 140ms var(--ease-out);
+}
+.zoneItem:active,
+.directoryItem:active {
+  transform: scale(0.98);
+}
+.zoneItem:focus-visible,
+.directoryItem:focus-visible {
+  outline: 2px solid var(--electric-text);
+  outline-offset: 2px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .zoneItem:hover,
+  .directoryItem:hover {
+    border-color: var(--electric);
+    background: var(--surface-3);
+  }
+}
+.zoneItemStatus {
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: right;
+}
+.backBtn {
+  all: unset;
+  margin-top: 14px;
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  font-size: 14px;
+  color: var(--electric-text);
+  cursor: pointer;
+  border-radius: 6px;
+}
+.backBtn:focus-visible {
+  outline: 2px solid var(--electric-text);
+  outline-offset: 2px;
+}
+
+.legend {
+  width: min(420px, calc(100% - 32px));
+  padding: 4px 16px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.legend summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  cursor: pointer;
+  color: var(--text);
+  list-style: none;
+}
+.legend summary::-webkit-details-marker {
+  display: none;
+}
+.legend ul {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+/* Directorio: la lista accesible de puestos. En escritorio la oficina basta; en móvil es la vía principal. */
+.directory {
+  display: none;
+}
+.directoryTitle {
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+.directoryZone {
+  margin-top: 20px;
+}
+.directoryZone h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.directoryZone h3 span {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.directoryZone h3 span[data-ready="true"] {
+  color: var(--electric-text);
+}
+.officeChildren:empty {
+  display: none;
+}
+.fallback {
+  padding: 24px;
+}
+
+@media (max-width: 760px) {
+  .stage {
+    height: calc(100vw * 0.62 + 96px);
+    min-height: 320px;
+  }
+  .hud {
+    left: 12px;
+    right: 12px;
+    top: 10px;
+    gap: 8px 12px;
+  }
+  .crumbs {
+    order: 3;
+    width: 100%;
+  }
+  .legend,
+  .zonePanel {
+    display: none;
+  }
+  .plaque {
+    display: none;
+  }
+  .directory {
+    display: block;
+    padding: 20px 16px 40px;
+  }
+  .alert {
+    top: auto;
+    bottom: 12px;
+    left: 12px;
+  }
+}
+
+/* Movimiento reducido: por preferencia del sistema (salvo que la persona elija «Completas»)
+   o porque la persona eligió «Reducidas» en la oficina. */
+@media (prefers-reduced-motion: reduce) {
+  :global(:root:not([data-motion="completo"])) .stage > .world {
+    animation: none;
+  }
+  :global(:root:not([data-motion="completo"])) .world {
+    transition: none !important;
+  }
+  :global(:root:not([data-motion="completo"])) .entryHint {
+    animation: none;
+  }
+  :global(:root:not([data-motion="completo"])) .plaque,
+  :global(:root:not([data-motion="completo"])) .screenOverlay[data-on="entrando"],
+  :global(:root:not([data-motion="completo"])) .screenOverlay[data-on="volviendo"] {
+    animation: none;
+  }
+  :global(:root:not([data-motion="completo"])) .screenOverlay[data-on="entrando"] {
+    opacity: 1;
+  }
+  :global(:root:not([data-motion="completo"])) .world,
+  :global(:root:not([data-motion="completo"])) .tag,
+  :global(:root:not([data-motion="completo"])) .plaque,
+  :global(:root:not([data-motion="completo"])) .screenOverlay {
+    transition: none;
+  }
+  :global(:root:not([data-motion="completo"])) .zonePanel {
+    animation: none;
+  }
+}
+:global(:root[data-motion="reducido"]) .stage > .world {
+  animation: none;
+}
+:global(:root[data-motion="reducido"]) .world {
+  transition: none !important;
+}
+:global(:root[data-motion="reducido"]) .entryHint {
+  animation: none;
+}
+:global(:root[data-motion="reducido"]) .plaque,
+:global(:root[data-motion="reducido"]) .screenOverlay[data-on="entrando"],
+:global(:root[data-motion="reducido"]) .screenOverlay[data-on="volviendo"] {
+  animation: none;
+}
+:global(:root[data-motion="reducido"]) .screenOverlay[data-on="entrando"] {
+  opacity: 1;
+}
+:global(:root[data-motion="reducido"]) .world,
+:global(:root[data-motion="reducido"]) .tag,
+:global(:root[data-motion="reducido"]) .plaque,
+:global(:root[data-motion="reducido"]) .screenOverlay {
+  transition: none;
+}
+:global(:root[data-motion="reducido"]) .zonePanel {
+  animation: none;
+}

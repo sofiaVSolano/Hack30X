@@ -1,51 +1,55 @@
-/* HACK 30X · DETECTAR: sistema visual (ver .impeccable/surfaces y DESIGN.md).
- * Guía de programación de TV impresa: papel de revista, tinta, un rojo de cabecera propio,
- * insignias de canal en azul y amarillo. Archivo (Omnibus-Type) en ancho condensado para
- * cabeceras y normal para texto. Los estados llevan siempre icono y texto, no solo color. */
+/* HACK 30X: sistema visual (ver DESIGN.md).
+ * Oficina tecnológica de noche: azul noche profundo, azul eléctrico para lo interactivo y lima
+ * reservado a las señales importantes (actividad real, etapa «acelerando»). Geist para todo el
+ * texto y Geist Mono para cifras, identificadores y código. Los estados llevan siempre icono y
+ * texto, nunca solo color. */
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  --font-sans: "Archivo Variable", "Archivo", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono Variable", "Cascadia Code", ui-monospace, monospace;
-  --stretch-display: 62%; /* cabeceras y titulares */
-  --stretch-head: 82%; /* subtítulos */
+  --font-sans: "Geist Variable", "Geist", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", "Geist Mono", "Cascadia Code", ui-monospace, monospace;
 
-  --bg: #f1ecdf; /* papel de revista */
-  --surface: #f8f4ea; /* hoja */
-  --surface-2: #e9e2d2;
-  --surface-3: #ded5c2;
-  --line: #d3c9b4;
-  --line-strong: #b5a98f;
-  --wall: #2a2620; /* trazo de plano en tinta */
-  --lamp: #d21f2b; /* luz «al aire»: solo con ejecución real en curso */
+  --bg: #070d1c; /* azul noche */
+  --surface: #0c1630;
+  --surface-2: #111e3f;
+  --surface-3: #172850;
+  --line: #1e2f5a;
+  --line-strong: #2f467f;
+  --wall: #16254d;
 
-  --text: #16130f; /* tinta */
-  --text-muted: #4a443a;
-  --text-faint: #635b4e;
+  --text: #e8eefc;
+  --text-muted: #a9b6d6;
+  --text-faint: #8a99c0;
 
-  --signal: #d21f2b; /* rojo de cabecera HACK 30X: cabecera, acción principal, en emisión */
+  --electric: #3d7bff; /* azul eléctrico: bordes, indicadores e interacción */
+  --electric-fill: #2f63e0; /* el mismo azul, más profundo, bajo texto blanco (5,27:1) */
+  --electric-fill-hover: #2556c9;
+  --electric-text: #7ea6ff; /* el mismo azul, legible como texto sobre el fondo */
+  --lime: #c6f432; /* señal importante: actividad real y etapa «acelerando» */
+  --lime-ink: #0b1400;
+  --signal: var(--electric-fill);
   --signal-ink: #ffffff;
-  --channel-blue: #1f56b3;
-  --channel-yellow: #f2c230;
-  --info: #1f56b3;
-  --ok: #136136;
-  --warn: #6f4500;
-  --danger: #b3261e;
-  --sim: #6a3fa3;
+  --info: #7ea6ff;
+  --ok: #6fe0a0;
+  --warn: #f5c060;
+  --danger: #ff8f8f;
+  --sim: #c4a6ff;
 
-  --info-bg: rgba(31, 86, 179, 0.1);
-  --ok-bg: rgba(27, 122, 71, 0.11);
-  --warn-bg: rgba(242, 194, 48, 0.28);
-  --danger-bg: rgba(179, 38, 30, 0.1);
-  --sim-bg: rgba(106, 63, 163, 0.11);
-  --neutral-bg: rgba(22, 19, 15, 0.07);
+  --info-bg: rgba(61, 123, 255, 0.16);
+  --ok-bg: rgba(111, 224, 160, 0.13);
+  --warn-bg: rgba(245, 192, 96, 0.14);
+  --danger-bg: rgba(255, 143, 143, 0.13);
+  --danger-line: rgba(255, 143, 143, 0.35);
+  --sim-bg: rgba(196, 166, 255, 0.14);
+  --sim-line: rgba(196, 166, 255, 0.35);
+  --neutral-bg: rgba(232, 238, 252, 0.08);
 
-  --radius-s: 4px;
-  --radius: 8px;
-  --radius-l: 12px;
-  --shadow: 0 16px 36px rgba(40, 30, 15, 0.18), 0 2px 6px rgba(40, 30, 15, 0.08);
-  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--channel-blue);
+  --radius-s: 6px;
+  --radius: 10px;
+  --radius-l: 14px;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--electric-text);
 
   --space-1: 4px;
   --space-2: 8px;
@@ -69,7 +73,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  color-scheme: light;
+  color-scheme: dark;
   -webkit-tap-highlight-color: transparent;
 }
 /* En móvil la navegación es fija arriba: el elemento enfocado no debe quedar debajo. */
@@ -86,18 +90,18 @@ body {
   color: var(--text);
   font-family: var(--font-sans);
   font-size: 15.5px;
-  line-height: 1.5;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--channel-yellow);
-  color: var(--text);
+  background: rgba(61, 123, 255, 0.45);
+  color: #ffffff;
 }
 html {
   scrollbar-color: var(--line-strong) var(--bg);
-  accent-color: var(--signal);
-  caret-color: var(--signal);
+  accent-color: var(--electric);
+  caret-color: var(--electric-text);
 }
 
 h1,
@@ -105,9 +109,9 @@ h2,
 h3,
 h4 {
   margin: 0;
-  line-height: 1.12;
-  font-weight: 700;
-  letter-spacing: -0.015em;
+  line-height: 1.15;
+  font-weight: 650;
+  letter-spacing: -0.02em;
   text-wrap: balance;
   scroll-margin-top: 96px;
 }
@@ -124,7 +128,8 @@ p {
 }
 
 a {
-  color: var(--info);
+  color: var(--electric-text);
+  text-underline-offset: 3px;
 }
 
 code,
@@ -196,8 +201,8 @@ code,
     border-color: var(--text-faint);
   }
   .btn--primary:hover {
-    background: #b51722;
-    border-color: #b51722;
+    background: var(--electric-fill-hover);
+    border-color: var(--electric-fill-hover);
   }
 }
 .btn:active:not(:disabled) {
@@ -207,7 +212,7 @@ code,
   background: var(--signal);
   border-color: var(--signal);
   color: var(--signal-ink);
-  font-weight: 650;
+  font-weight: 600;
 }
 .btn:disabled {
   opacity: 0.55;
@@ -266,41 +271,41 @@ code,
   background: var(--danger-bg);
   color: var(--danger);
 }
-/* Insignias de canal: la etapa como el número de canal de una guía de TV. */
+/* Etapa de un tema: insignia llena con su nombre. Lima solo para «acelerando», la señal clave. */
 .channel {
   display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
-  border-radius: 2px;
-  font-size: 13px;
-  font-weight: 750;
-  font-stretch: var(--stretch-head);
-  line-height: 1.5;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.6;
   white-space: nowrap;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
 }
 .channel[data-stage="acelerando"] {
-  background: var(--signal);
-  color: #ffffff;
+  background: var(--lime);
+  color: var(--lime-ink);
 }
 .channel[data-stage="emergente"] {
-  background: var(--channel-blue);
+  background: var(--electric-fill);
   color: #ffffff;
 }
 .channel[data-stage="punto_maximo"] {
-  background: var(--channel-yellow);
-  color: var(--text);
+  background: rgba(245, 192, 96, 0.16);
+  border-color: rgba(245, 192, 96, 0.5);
+  color: var(--warn);
 }
 .channel[data-stage="datos_insuficientes"],
 .channel[data-stage="saturada"] {
-  border-color: var(--text-faint);
+  border-color: var(--line-strong);
   color: var(--text-muted);
 }
 
 .badge--sim {
   background: var(--sim-bg);
   color: var(--sim);
-  border-color: rgba(106, 63, 163, 0.35);
+  border-color: var(--sim-line);
 }
 .badge--outline {
   background: transparent;
@@ -326,19 +331,14 @@ code,
   flex-wrap: wrap;
 }
 .panel__title {
-  font-size: 19px;
-  font-stretch: var(--stretch-head);
-  font-weight: 750;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 .panel__sub {
   color: var(--text-muted);
   font-size: 13.5px;
   margin-top: 2px;
-}
-.eyebrow {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-faint);
 }
 
 .grid {
@@ -412,7 +412,7 @@ code,
   transition: background 120ms var(--ease);
 }
 .table tbody tr:hover {
-  background: rgba(22, 19, 15, 0.035);
+  background: rgba(126, 166, 255, 0.05);
 }
 .sort-btn {
   all: unset;
@@ -433,7 +433,7 @@ code,
   border-radius: 4px;
 }
 .row-btn:hover {
-  color: var(--signal);
+  color: var(--electric-text);
 }
 .row-btn:focus-visible {
   box-shadow: var(--focus);
@@ -470,7 +470,7 @@ code,
 }
 .input:focus-visible,
 .select:focus-visible {
-  border-color: var(--signal);
+  border-color: var(--electric);
 }
 .filters {
   display: flex;
@@ -490,7 +490,7 @@ code,
 .check input {
   width: 16px;
   height: 16px;
-  accent-color: var(--signal);
+  accent-color: var(--electric);
 }
 
 /* --- avisos ---------------------------------------------------------------------------- */
@@ -510,15 +510,15 @@ code,
   margin-top: 2px;
 }
 .notice--warn {
-  border-color: rgba(138, 86, 0, 0.35);
+  border-color: rgba(245, 192, 96, 0.4);
   background: var(--warn-bg);
 }
 .notice--danger {
-  border-color: rgba(179, 38, 30, 0.3);
+  border-color: var(--danger-line);
   background: var(--danger-bg);
 }
 .notice--info {
-  border-color: rgba(31, 86, 179, 0.3);
+  border-color: rgba(61, 123, 255, 0.4);
   background: var(--info-bg);
 }
 .notice__title {
@@ -564,15 +564,25 @@ code,
   list-style: none;
 }
 
+/* Movimiento reducido: por preferencia del sistema (salvo que la persona elija «Completas»)
+   o porque la persona eligió «Reducidas» en la oficina. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  :root:not([data-motion="completo"]) *,
+  :root:not([data-motion="completo"]) *::before,
+  :root:not([data-motion="completo"]) *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+:root[data-motion="reducido"] *,
+:root[data-motion="reducido"] *::before,
+:root[data-motion="reducido"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }
 
 /* --- explicaciones emergentes ---------------------------------------------------------- */
@@ -682,11 +692,10 @@ code,
   margin-bottom: var(--space-5);
 }
 .page-title {
-  font-size: clamp(34px, 4.4vw, 54px);
-  font-stretch: var(--stretch-display);
-  font-weight: 800;
-  line-height: 0.98;
-  letter-spacing: -0.01em;
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 650;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 .page-lede {
   color: var(--text-muted);
@@ -700,4 +709,115 @@ code,
   gap: var(--space-3);
   margin-top: var(--space-3);
   flex-wrap: wrap;
+}
+
+html {
+  scrollbar-color: var(--line-strong) transparent;
+}
+.table td,
+.dl dd {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- transiciones de vista (React <ViewTransition>, skill vercel-react-view-transitions) ------
+ * La raíz no se funde: solo se mueven la pantalla del computador (elemento con nombre) y el
+ * contenido de cada sección del computador. */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-old(root) {
+  display: none;
+}
+::view-transition-new(root) {
+  animation: none;
+}
+::view-transition-group(.pantalla) {
+  animation-duration: 1600ms;
+  animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+}
+::view-transition-image-pair(.pantalla) {
+  animation: 1600ms cubic-bezier(0.32, 0.72, 0, 1) both soft-focus;
+}
+::view-transition-old(.pantalla),
+::view-transition-new(.pantalla) {
+  height: 100%;
+  object-fit: fill;
+}
+::view-transition-old(.pantalla) {
+  animation: 900ms cubic-bezier(0.45, 0, 0.15, 1) 600ms both vt-fade reverse;
+}
+::view-transition-new(.pantalla) {
+  animation: 1100ms cubic-bezier(0.22, 1, 0.36, 1) 350ms both vt-materialize;
+}
+@keyframes vt-materialize {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+@keyframes soft-focus {
+  0% {
+    filter: blur(0);
+  }
+  35% {
+    filter: blur(1.5px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+::view-transition-new(.pestana-entra) {
+  animation:
+    200ms ease-out 110ms both vt-fade,
+    320ms cubic-bezier(0.23, 1, 0.32, 1) both vt-rise;
+}
+::view-transition-old(.pestana-sale) {
+  animation: 110ms ease-in both vt-fade reverse;
+}
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes vt-rise {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+/* Movimiento reducido: por preferencia del sistema (salvo que la persona elija «Completas»)
+   o porque la persona eligió «Reducidas» en la oficina. */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="completo"])::view-transition-group(*),
+  :root:not([data-motion="completo"])::view-transition-old(*),
+  :root:not([data-motion="completo"])::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+:root[data-motion="reducido"]::view-transition-group(*),
+:root[data-motion="reducido"]::view-transition-old(*),
+:root[data-motion="reducido"]::view-transition-new(*) {
+  animation: none !important;
+}
+
+/* Nombre del campo de datos que muestra un bloque de código (no es un titular). */
+.code-block__title {
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-muted);
 }
