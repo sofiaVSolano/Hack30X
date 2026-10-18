@@ -16,6 +16,11 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.modules.crear.api.errors import (
+    install_exception_handlers as install_crear_exception_handlers,
+)
+from app.modules.crear.api.router import API_PREFIX as CREAR_PREFIX
+from app.modules.crear.api.router import router as crear_router
 from app.modules.detectar.api.dependencies import detectar_scheduler_lifespan
 from app.modules.detectar.api.errors import install_exception_handlers
 from app.modules.detectar.api.router import API_PREFIX as DETECTAR_PREFIX
@@ -40,7 +45,12 @@ def create_app() -> FastAPI:
     # /api/detectar; acordar con el equipo cómo combinarlo cuando se integren otros módulos.
     install_exception_handlers(app, prefix=DETECTAR_PREFIX)
 
-    # ENTENDER, CREAR y VALIDAR se integrarán aquí cuando existan.
+    # CREAR (laboratorio creativo). Lee DETECTAR sin escribir en él. Sus manejadores se
+    # instalan DESPUÉS de los de DETECTAR: el de validación atiende /api/crear y delega el resto.
+    app.include_router(crear_router, prefix=CREAR_PREFIX)
+    install_crear_exception_handlers(app, prefix=CREAR_PREFIX)
+
+    # ENTENDER y VALIDAR se integrarán aquí cuando existan.
     return app
 
 

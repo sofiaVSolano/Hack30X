@@ -100,6 +100,23 @@ en su terminal.
 - Para usar la base real en lugar de la de demostración: `npm run backend`, sin `DETECTAR_DB_PATH`.
 - Si la carpeta temporal se borró: `npm run demo:preparar -- --reiniciar`.
 
+## CREAR: laboratorio creativo
+
+Sección **Laboratorio creativo** de la oficina (`/crear`). Parte de una **brecha inglés–español**
+(un tema con mucha más atención en inglés que en español), de un tema de DETECTAR o de un tema
+escrito a mano; genera **tres propuestas** (educativa, controversial y narrativa) para la
+plataforma y la audiencia elegidas, y permite **regenerar** cada una con otro enfoque, audiencia
+o plataforma sin perder las versiones anteriores.
+
+- Cada lote se descarga como **documento PDF** («Descargar PDF»): las tres propuestas, los datos
+  de DETECTAR que usaron y sus precauciones, listo para compartir con el equipo.
+- Lee DETECTAR sin modificarlo y guarda sus propuestas en su propia base (`crear.db`).
+- Con `ANTHROPIC_API_KEY` usa Claude; sin ella, plantillas deterministas (funciona sin red).
+- Para ver brechas en la demostración, después de `npm run demo:preparar` ejecute desde
+  `backend/`: `.venv/Scripts/python.exe -m app.modules.crear.demo`.
+
+Detalles: [backend/app/modules/crear/docs/crear.md](backend/app/modules/crear/docs/crear.md).
+
 ## Seguridad
 
 - La oficina **solo funciona en el propio equipo**: no se puede abrir desde otra computadora.

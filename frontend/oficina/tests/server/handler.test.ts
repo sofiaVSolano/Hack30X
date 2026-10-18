@@ -241,8 +241,10 @@ describe("rutas del intermediario", () => {
   const walk = (dir: string) => {
     for (const name of readdirSync(dir)) {
       const full = join(dir, name);
-      if (statSync(full).isDirectory()) walk(full);
-      else if (name === "route.ts") files.push(full);
+      // CREAR tiene su propio intermediario, con escrituras acotadas: ver tests/crear/handler.test.ts.
+      if (statSync(full).isDirectory()) {
+        if (full !== join(root, "crear")) walk(full);
+      } else if (name === "route.ts") files.push(full);
     }
   };
   walk(root);

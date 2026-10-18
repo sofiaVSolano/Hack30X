@@ -81,9 +81,11 @@ def test_importing_main_has_no_side_effects(tmp_path: Path) -> None:
 
 
 def test_detectar_routes_are_mounted_once_under_the_prefix() -> None:
-    paths = list(main.app.openapi()["paths"])
+    all_paths = list(main.app.openapi()["paths"])
+    paths = [p for p in all_paths if p.startswith("/api/detectar/")]
 
-    assert paths and all(p.startswith("/api/detectar/") for p in paths)
+    # Las demás rutas son de otros módulos montados en la app compartida (hoy, CREAR).
+    assert paths and all(p.startswith(("/api/detectar/", "/api/crear/")) for p in all_paths)
     assert not any(p.startswith("/api/detectar/api/detectar") for p in paths)
     assert "/api/detectar/health" in paths
     reference = FastAPI()

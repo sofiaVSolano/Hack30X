@@ -1,0 +1,414 @@
+{
+ "dataset_id": "crear_demo_brechas",
+ "version": "1.0.0",
+ "naturaleza": "sintetico_demostracion",
+ "descripcion": "Complemento SINTÉTICO de demostración de CREAR para la base simulada de DETECTAR. Añade temas inventados con lecturas en inglés y capturas de Google Trends de EE. UU. para mostrar cada veredicto de brechas-v1. No describe el comportamiento real de ningún tema.",
+ "procedencia": "Redactado por el equipo de CREAR con valores deterministas, elegidos para que DETECTAR asigne a cada tema la misma etapa con sus artículos en inglés y en español (stages-v1 sin cambios). No procede de Wikimedia, Google Trends ni de ninguna otra fuente, ni contiene datos personales.",
+ "proposito": "Verificar el laboratorio creativo de CREAR (brechas inglés-español y propuestas) en modo simulated.",
+ "limitaciones": [
+  "Las cifras son inventadas: no sirven como evidencia de ninguna tendencia real.",
+  "Se carga DESPUÉS del conjunto de DETECTAR (detectar_demo_sintetico) y no modifica sus temas.",
+  "El campo fuente indica qué formato y qué reglas de conector imita cada serie, no su origen.",
+  "Los artículos y términos no existen en Wikipedia ni en Google Trends."
+ ],
+ "periodo": {
+  "inicio": "2026-09-01",
+  "fin": "2026-09-30"
+ },
+ "momento_registro": "2026-10-01T00:00:00Z",
+ "fechas_metricas": [
+  "2026-09-21",
+  "2026-09-22",
+  "2026-09-23",
+  "2026-09-24",
+  "2026-09-25",
+  "2026-09-26",
+  "2026-09-27",
+  "2026-09-28",
+  "2026-09-29",
+  "2026-09-30"
+ ],
+ "fecha_clasificacion": "2026-09-30",
+ "escenarios": {
+  "Tema demo Eta": "Mucho más leído en inglés que en español (acelerando en ambos) y presente en todas las capturas de EE. UU., sin aparecer en las de México: brecha confirmada.",
+  "Tema demo Zeta": "Solo se midió el artículo en inglés: brecha por confirmar.",
+  "Tema demo Theta": "Más leído en inglés que en español, pero en Google Trends aparece en México y no en EE. UU.: señales mixtas.",
+  "Temas de DETECTAR": "Alfa, Beta, Gamma, Delta y Épsilon no cambian; las capturas de EE. UU. permiten saber que Alfa y Épsilon no aparecen allí."
+ },
+ "unidades": {
+  "wikimedia/wiki_pageviews": "views (visitas diarias)",
+  "google_trends_rss/gtr_trending_presence": "presence (1 = presente en la captura)"
+ },
+ "series": [
+  {
+   "fuente": "wikimedia",
+   "proyecto": "en.wikipedia.org",
+   "articulo": "Tema_demo_Eta",
+   "idioma": "en",
+   "diario": {
+    "2026-09-01": 686,
+    "2026-09-02": 707,
+    "2026-09-03": 693,
+    "2026-09-04": 714,
+    "2026-09-05": 686,
+    "2026-09-06": 707,
+    "2026-09-07": 707,
+    "2026-09-08": 686,
+    "2026-09-09": 707,
+    "2026-09-10": 784,
+    "2026-09-11": 808,
+    "2026-09-12": 792,
+    "2026-09-13": 816,
+    "2026-09-14": 784,
+    "2026-09-15": 808,
+    "2026-09-16": 808,
+    "2026-09-17": 980,
+    "2026-09-18": 1010,
+    "2026-09-19": 990,
+    "2026-09-20": 1020,
+    "2026-09-21": 980,
+    "2026-09-22": 1010,
+    "2026-09-23": 1010,
+    "2026-09-24": 1372,
+    "2026-09-25": 1414,
+    "2026-09-26": 1386,
+    "2026-09-27": 1428,
+    "2026-09-28": 1372,
+    "2026-09-29": 1414,
+    "2026-09-30": 1414
+   }
+  },
+  {
+   "fuente": "wikimedia",
+   "proyecto": "es.wikipedia.org",
+   "articulo": "Tema_demo_Eta",
+   "idioma": "es",
+   "diario": {
+    "2026-09-01": 26,
+    "2026-09-02": 29,
+    "2026-09-03": 27,
+    "2026-09-04": 30,
+    "2026-09-05": 26,
+    "2026-09-06": 29,
+    "2026-09-07": 29,
+    "2026-09-08": 26,
+    "2026-09-09": 29,
+    "2026-09-10": 28,
+    "2026-09-11": 31,
+    "2026-09-12": 29,
+    "2026-09-13": 32,
+    "2026-09-14": 28,
+    "2026-09-15": 31,
+    "2026-09-16": 31,
+    "2026-09-17": 36,
+    "2026-09-18": 39,
+    "2026-09-19": 37,
+    "2026-09-20": 40,
+    "2026-09-21": 36,
+    "2026-09-22": 39,
+    "2026-09-23": 39,
+    "2026-09-24": 54,
+    "2026-09-25": 57,
+    "2026-09-26": 55,
+    "2026-09-27": 58,
+    "2026-09-28": 54,
+    "2026-09-29": 57,
+    "2026-09-30": 57
+   }
+  },
+  {
+   "fuente": "wikimedia",
+   "proyecto": "en.wikipedia.org",
+   "articulo": "Tema_demo_Zeta",
+   "idioma": "en",
+   "diario": {
+    "2026-09-17": 588,
+    "2026-09-18": 606,
+    "2026-09-19": 594,
+    "2026-09-20": 612,
+    "2026-09-21": 588,
+    "2026-09-22": 606,
+    "2026-09-23": 606,
+    "2026-09-24": 882,
+    "2026-09-25": 909,
+    "2026-09-26": 891,
+    "2026-09-27": 918,
+    "2026-09-28": 882,
+    "2026-09-29": 909,
+    "2026-09-30": 909
+   }
+  },
+  {
+   "fuente": "wikimedia",
+   "proyecto": "en.wikipedia.org",
+   "articulo": "Tema_demo_Theta",
+   "idioma": "en",
+   "diario": {
+    "2026-09-17": 490,
+    "2026-09-18": 505,
+    "2026-09-19": 495,
+    "2026-09-20": 510,
+    "2026-09-21": 490,
+    "2026-09-22": 505,
+    "2026-09-23": 505,
+    "2026-09-24": 686,
+    "2026-09-25": 707,
+    "2026-09-26": 693,
+    "2026-09-27": 714,
+    "2026-09-28": 686,
+    "2026-09-29": 707,
+    "2026-09-30": 707
+   }
+  },
+  {
+   "fuente": "wikimedia",
+   "proyecto": "es.wikipedia.org",
+   "articulo": "Tema_demo_Theta",
+   "idioma": "es",
+   "diario": {
+    "2026-09-17": 98,
+    "2026-09-18": 101,
+    "2026-09-19": 99,
+    "2026-09-20": 102,
+    "2026-09-21": 98,
+    "2026-09-22": 101,
+    "2026-09-23": 101,
+    "2026-09-24": 138,
+    "2026-09-25": 141,
+    "2026-09-26": 139,
+    "2026-09-27": 142,
+    "2026-09-28": 138,
+    "2026-09-29": 141,
+    "2026-09-30": 141
+   }
+  },
+  {
+   "fuente": "google_trends_rss",
+   "pais": "US",
+   "capturas": [
+    {
+     "momento": "2026-09-01T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-02T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-03T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-04T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-05T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-06T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-07T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-08T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-09T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-10T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-11T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-12T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-13T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-14T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-15T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-16T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-17T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-18T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-19T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-20T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-21T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-22T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-23T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-24T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-25T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-26T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-27T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-28T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-29T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    },
+    {
+     "momento": "2026-09-30T12:00:00Z",
+     "titulos": [
+      "Tema demo Eta"
+     ]
+    }
+   ]
+  },
+  {
+   "fuente": "google_trends_rss",
+   "pais": "MX",
+   "capturas": [
+    {
+     "momento": "2026-09-25T12:00:00Z",
+     "titulos": [
+      "Tema demo Theta"
+     ]
+    },
+    {
+     "momento": "2026-09-26T12:00:00Z",
+     "titulos": [
+      "Tema demo Theta"
+     ]
+    },
+    {
+     "momento": "2026-09-27T12:00:00Z",
+     "titulos": [
+      "Tema demo Theta"
+     ]
+    },
+    {
+     "momento": "2026-09-28T12:00:00Z",
+     "titulos": [
+      "Tema demo Theta"
+     ]
+    },
+    {
+     "momento": "2026-09-29T12:00:00Z",
+     "titulos": [
+      "Tema demo Theta"
+     ]
+    },
+    {
+     "momento": "2026-09-30T12:00:00Z",
+     "titulos": [
+      "Tema demo Theta"
+     ]
+    }
+   ]
+  }
+ ]
+}

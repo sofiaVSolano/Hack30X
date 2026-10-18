@@ -8,6 +8,7 @@ import {
   History,
   Layers,
   LayoutDashboard,
+  Sparkles,
   Tags,
   type LucideIcon,
 } from "lucide-react";
@@ -27,6 +28,8 @@ export const NAV: { href: string; label: string; icon: LucideIcon }[] = [
   { href: "/temas", label: "Temas", icon: Tags },
   { href: "/metricas", label: "Métricas", icon: ChartLine },
   { href: "/clasificaciones", label: "Clasificaciones", icon: Layers },
+  // CREAR: el único módulo de la oficina que escribe (solo en su propia base de propuestas).
+  { href: "/crear", label: "Laboratorio creativo", icon: Sparkles },
 ];
 
 function ModeSwitch() {
@@ -84,7 +87,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className={styles.sideFoot}>
           <span className="eyebrow">Modo de datos</span>
           <ModeSwitch />
-          <p className={styles.readonly}>Solo lectura, uso local</p>
+          <p className={styles.readonly}>DETECTAR en solo lectura, uso local</p>
         </div>
       </aside>
       <div className={styles.main}>
