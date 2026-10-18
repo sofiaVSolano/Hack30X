@@ -12,17 +12,19 @@
   flex-direction: column;
   gap: var(--space-5);
   padding: var(--space-5) var(--space-4);
-  border-right: 1px solid var(--line);
-  background: rgba(9, 13, 19, 0.92);
+  border-right: 2px solid var(--wall);
+  background: var(--surface);
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  color: var(--text);
+  color: var(--signal-ink);
+  background: var(--signal);
   text-decoration: none;
-  padding: 4px;
+  margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-4)) 0;
+  padding: var(--space-4);
 }
 .brandText {
   display: flex;
@@ -30,12 +32,15 @@
   line-height: 1.15;
 }
 .brandName {
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-weight: 800;
+  font-stretch: var(--stretch-display);
+  font-size: 22px;
+  line-height: 1;
 }
 .brandSub {
-  font-size: 12.5px;
-  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--signal-ink);
 }
 
 .nav ul {
@@ -55,21 +60,22 @@
   border-radius: var(--radius-s);
   color: var(--text-muted);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   border: 1px solid transparent;
   transition:
-    background 140ms var(--ease),
+    background-color 140ms var(--ease),
     color 140ms var(--ease);
 }
-.navLink:hover {
-  color: var(--text);
-  background: var(--surface-2);
+@media (hover: hover) and (pointer: fine) {
+  .navLink:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
 }
+/* La sección activa se invierte, como la fila elegida en la parrilla. */
 .navLink[aria-current="page"] {
-  color: var(--text);
-  background: var(--surface-2);
-  border-color: var(--line);
-  box-shadow: inset 3px 0 0 var(--signal);
+  color: var(--bg);
+  background: var(--text);
 }
 
 .sideFoot {
@@ -111,8 +117,8 @@
   color: var(--text);
 }
 .modeSim[aria-current="true"] {
-  background: var(--sim-bg);
-  color: var(--sim);
+  background: var(--sim);
+  color: #ffffff;
 }
 
 .main {
@@ -125,8 +131,8 @@
   align-items: center;
   gap: var(--space-2);
   padding: 10px var(--space-6);
-  background: repeating-linear-gradient(-45deg, rgba(196, 162, 255, 0.16) 0 12px, rgba(196, 162, 255, 0.08) 12px 24px);
-  border-bottom: 1px solid rgba(196, 162, 255, 0.35);
+  background: var(--sim-bg);
+  border-bottom: 2px solid var(--sim);
   color: var(--text);
   font-size: 14px;
 }
@@ -175,8 +181,9 @@
     white-space: nowrap;
     min-height: 36px;
   }
-  .navLink[aria-current="page"] {
-    box-shadow: inset 0 -2px 0 var(--signal);
+  .brand {
+    margin: calc(-1 * var(--space-3)) 0 0 calc(-1 * var(--space-4));
+    padding: var(--space-3) var(--space-4);
   }
   .sideFoot {
     margin: 0 0 0 auto;

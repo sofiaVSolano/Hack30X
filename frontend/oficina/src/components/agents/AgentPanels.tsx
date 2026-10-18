@@ -45,7 +45,7 @@ export function AgentCard({ agent, onOpen }: { agent: Agent; onOpen: (agent: Age
             {agent.id}
           </p>
         </div>
-        <Desk activity={agent.actividad} implemented={agent.implementado} size={92} />
+        <Desk who={agent.id} activity={agent.actividad} implemented={agent.implementado} size={92} />
       </div>
       <p className="muted small">{agent.descripcion}</p>
       <dl className="dl small">

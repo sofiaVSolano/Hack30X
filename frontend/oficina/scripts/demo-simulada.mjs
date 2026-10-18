@@ -207,7 +207,7 @@ async function servir() {
     await waitFor(`http://127.0.0.1:${backendPort}/api/detectar/health`);
     await waitFor(`${officeUrl}/api/oficina/salud`);
     if (!flag("--verificar")) {
-      console.log(`Oficina (modo simulado): ${officeUrl}/?modo=simulated   — Ctrl+C para detener`);
+      console.log(`Oficina (modo simulado): ${officeUrl}/tendencias?modo=simulated   — Ctrl+C para detener`);
       await new Promise((r) => process.once("SIGINT", r));
       return;
     }

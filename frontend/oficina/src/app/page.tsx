@@ -1,5 +1,5 @@
-import { OfficeView } from "@/views/OfficeView";
+import { LandingView } from "@/views/landing/LandingView";
 
 export default function Page() {
-  return <OfficeView />;
+  return <LandingView />;
 }

@@ -82,12 +82,13 @@ export function RunStatusBadge({ status }: { status: AgentRunStatus }) {
   );
 }
 
+/** Etapa como insignia de canal de guía de TV: un cuadro de color lleno con su nombre. */
 export function StageBadge({ stage }: { stage: Stage }) {
   const spec = STAGE[stage];
   return (
-    <Badge tone={spec.tone} title={spec.hint}>
+    <span className="channel" data-stage={stage} title={spec.hint}>
       {spec.text}
-    </Badge>
+    </span>
   );
 }
 

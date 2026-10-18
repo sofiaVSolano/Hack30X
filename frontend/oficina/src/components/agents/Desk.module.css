@@ -1,100 +1,112 @@
+/* Personita en su puesto: ilustración plana en tinta y colores de la guía; ninguna pieza tapa a otra. */
 .desk {
   display: block;
   overflow: visible;
   max-width: 100%;
   height: auto;
 }
-.table {
-  fill: #1c2e41;
-  stroke: var(--wall);
-  stroke-width: 1.2;
+.table,
+.leg,
+.monitor,
+.stand {
+  fill: var(--wall);
 }
-.monitor {
-  fill: #0b141e;
-  stroke: #3a516a;
-  stroke-width: 1.2;
+.floor {
+  fill: var(--line-strong);
 }
-.stand,
 .keyboard {
-  fill: #2a3f55;
+  fill: var(--text-faint);
+}
+.mug {
+  fill: var(--signal);
 }
 .screen {
-  fill: #121f2d;
-  transition: fill 300ms var(--ease);
+  fill: #3b352c;
+  transition: fill 240ms var(--ease-out);
 }
-.lamp {
-  fill: #3a4d61;
+.chair rect,
+.chair circle {
+  fill: var(--text-muted);
 }
-.lampGlow {
-  fill: var(--lamp);
-  opacity: 0;
+.shoe,
+.eye {
+  fill: var(--text);
 }
-.chair {
-  fill: #1a2a3b;
-  stroke: var(--wall);
-  stroke-width: 1.2;
-  transition:
-    cx 300ms var(--ease),
-    cy 300ms var(--ease);
-}
-.shoulders {
-  fill: #6f8aa6;
-}
-.head {
-  fill: #9fb4c9;
-}
-
-/* Rol sin tarea: silla apartada, sin agente, mesa tenue */
-.desk[data-state="vacante"] .table {
-  fill: #172636;
-  stroke-dasharray: 3 3;
-}
-.desk[data-state="vacante"] .monitor {
-  opacity: 0.55;
-}
-
-/* Implementado: el agente lleva el acento de HACK 30X */
-.desk:not([data-state="vacante"]) .shoulders {
-  fill: #7f9a6a;
-}
-.desk:not([data-state="vacante"]) .head {
-  fill: #c5d6b5;
-}
-
-/* Último resultado: pantalla en reposo con su símbolo */
-.glyphOk,
-.glyphBad,
-.glyphWarn {
+.armsWork path,
+.armsRest path {
   fill: none;
-  stroke-width: 2.6;
+  stroke-width: 7;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.glyphOk {
-  stroke: var(--ok);
+
+/* Luz «al aire»: apagada salvo con trabajo real */
+.onAir rect {
+  fill: var(--surface-2);
+  stroke: var(--line-strong);
+  stroke-width: 1;
 }
-.glyphBad {
-  stroke: var(--danger);
-}
-.glyphWarn {
-  stroke: var(--warn);
-}
-.standby {
+.onAir text {
+  font-family: var(--font-sans);
+  font-stretch: 75%;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
   fill: var(--text-faint);
 }
-
-/* Trabajando (solo pendiente/en_curso según la API) */
-.desk[data-state="trabajando"] .screen {
-  fill: #1f3a2a;
-}
-.desk[data-state="trabajando"] .lamp {
+.desk[data-state="trabajando"] .onAir rect {
   fill: var(--lamp);
+  stroke: var(--lamp);
 }
-.desk[data-state="trabajando"] .lampGlow {
-  opacity: 0.22;
+.desk[data-state="trabajando"] .onAir text {
+  fill: #ffffff;
+}
+
+/* Puesto vacante: rol sin tarea, silla vacía y monitor apagado */
+.desk[data-state="vacante"] .monitor,
+.desk[data-state="vacante"] .stand {
+  fill: var(--line-strong);
+}
+.desk[data-state="vacante"] .screen {
+  fill: var(--surface-3);
+}
+.desk[data-state="vacante"] .chair rect,
+.desk[data-state="vacante"] .chair circle {
+  fill: transparent;
+  stroke: var(--line-strong);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+.desk[data-state="vacante"] .mug {
+  fill: var(--line-strong);
+}
+
+/* Último resultado en pantalla */
+.glyph {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.glyph[data-tone="ok"] {
+  stroke: #7fe0a8;
+}
+.glyph[data-tone="danger"] {
+  stroke: #ff9b90;
+}
+.glyph[data-tone="warn"] {
+  stroke: var(--channel-yellow);
+}
+.standby {
+  fill: #a39a8a;
+}
+
+/* Trabajando: pantalla encendida, líneas que se escriben y manos que teclean */
+.desk[data-state="trabajando"] .screen {
+  fill: #fff6d6;
 }
 .line {
-  fill: var(--signal);
+  fill: var(--wall);
   transform-box: fill-box;
   transform-origin: left center;
   animation: type 1.6s steps(6, end) infinite;
@@ -105,33 +117,30 @@
 .line:nth-child(3) {
   animation-delay: 0.8s;
 }
-.desk[data-state="trabajando"] .agent {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: lean 2.4s ease-in-out infinite;
+.armsWork {
+  animation: tap 0.42s ease-in-out infinite alternate;
 }
 
 @keyframes type {
-  0% {
+  from {
     transform: scaleX(0.15);
   }
-  100% {
+  to {
     transform: scaleX(1);
   }
 }
-@keyframes lean {
-  0%,
-  100% {
-    transform: translateY(0);
+@keyframes tap {
+  from {
+    translate: 0 0;
   }
-  50% {
-    transform: translateY(-1.5px);
+  to {
+    translate: 0 -1.5px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .line,
-  .desk[data-state="trabajando"] .agent {
+  .armsWork {
     animation: none;
   }
 }

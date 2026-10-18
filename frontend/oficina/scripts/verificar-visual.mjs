@@ -13,7 +13,7 @@ const require = createRequire(import.meta.url);
 const base = process.env.OFICINA_URL ?? "http://127.0.0.1:3000";
 const out = process.env.SALIDA ?? "verificacion";
 const mode = process.env.MODO === "simulated" ? "simulated" : "real";
-const routes = (process.env.RUTAS ?? "/,/agentes,/ejecuciones,/programador,/temas,/metricas,/clasificaciones").split(",");
+const routes = (process.env.RUTAS ?? "/,/tendencias,/oficina,/agentes,/ejecuciones,/programador,/temas,/metricas,/clasificaciones").split(",");
 const viewports = [
   { name: "escritorio", width: 1440, height: 900 },
   { name: "movil", width: 390, height: 844 },
@@ -61,7 +61,7 @@ for (const viewport of viewports) {
     keyboard.ok = keyboard.primerFoco === "Saltar al contenido" && keyboard.visible && keyboard.anillo && keyboard.focoEnContenido;
     await page.goto(url); // sin el #contenido que añadió el Enter
     await settle(page);
-    const slug = route === "/" ? "oficina" : route.slice(1);
+    const slug = route === "/" ? "portada" : route.slice(1);
     const shot = join(out, `${viewport.name}-${mode}-${slug}.png`);
     await page.screenshot({ path: shot, fullPage: true });
 
@@ -81,9 +81,9 @@ for (const viewport of viewports) {
   }
 
   // Interacción: abrir el detalle de un agente desde la planta y cerrarlo con Escape.
-  if (routes.includes("/")) {
+  if (routes.includes("/oficina")) {
     const page = await context.newPage();
-    await page.goto(`${base}/${mode === "simulated" ? "?modo=simulated" : ""}`);
+    await page.goto(`${base}/oficina${mode === "simulated" ? "?modo=simulated" : ""}`);
     await settle(page);
     const station = page.getByRole("button", { name: /Ver detalle/ }).first();
     if (await station.count()) {
@@ -94,7 +94,7 @@ for (const viewport of viewports) {
       await page.keyboard.press("Escape");
       await page.getByRole("dialog").waitFor({ state: "hidden" });
       const focusReturned = await page.evaluate(() => document.activeElement?.getAttribute("aria-label") ?? null);
-      report.pages.push({ viewport: viewport.name, route: "/ (detalle de agente)", focusReturned });
+      report.pages.push({ viewport: viewport.name, route: "/oficina (detalle de agente)", focusReturned });
     }
     await page.close();
   }

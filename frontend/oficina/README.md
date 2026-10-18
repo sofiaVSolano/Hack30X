@@ -33,7 +33,7 @@ un token nuevo que **no se muestra**. Si el archivo ya existe, no lo modifica.
 ```bash
 npm run backend      # DETECTAR en http://127.0.0.1:8000 (uvicorn, solo loopback)
 npm run build        # una vez, o tras cambios
-npm start            # oficina en http://127.0.0.1:3000 (o: npm run dev)
+npm start            # portada en http://127.0.0.1:3000; la oficina empieza en /tendencias (o: npm run dev)
 ```
 
 - **Mismo token:** ambos procesos leen el token del mismo archivo.
@@ -45,7 +45,7 @@ npm start            # oficina en http://127.0.0.1:3000 (o: npm run dev)
 ```bash
 npm run build
 npm run demo:preparar    # carpeta %TEMP%\hack30x-demo-simulada: carga el conjunto y ejecuta el flujo real
-npm run demo:servir      # abre http://127.0.0.1:<puerto>/?modo=simulated (Ctrl+C para terminar)
+npm run demo:servir      # abre http://127.0.0.1:<puerto>/tendencias?modo=simulated (Ctrl+C para terminar)
 npm run demo:verificar -- --salida C:\ruta\capturas    # comprobaciones automáticas con Edge
 npm run demo:limpiar     # borra solo la carpeta marcada de la demostración
 ```

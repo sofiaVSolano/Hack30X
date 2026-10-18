@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-17T20:30:00Z",
+  "title": "Design System: HACK 30X · DETECTAR",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "Papel de guía", "tonalRamp": ["#f8f4ea", "#f1ecdf", "#e9e2d2", "#ded5c2", "#d3c9b4", "#b5a98f"] },
+      "ink": { "role": "neutral", "displayName": "Tinta", "tonalRamp": ["#635b4e", "#4a443a", "#2a2620", "#16130f"] },
+      "signal-red": { "role": "primary", "displayName": "Rojo señal" },
+      "channel-blue": { "role": "secondary", "displayName": "Azul canal" },
+      "channel-yellow": { "role": "tertiary", "displayName": "Amarillo canal" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display condensada", "purpose": "El nombre DETECTAR y la palabra gigante REGLAS; font-stretch 62%." },
+      "section": { "displayName": "Sección", "purpose": "Títulos de sección de la portada; font-stretch 62%." },
+      "heading": { "displayName": "Encabezado", "purpose": "Títulos de baldosa, filas y paneles; font-stretch 82%." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Entradas, pulsación y hover." },
+      { "name": "ease-drawer", "value": "cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "Persiana de la captura central y diálogo lateral." },
+      { "name": "press", "value": "transform: scale(0.97) 160ms", "purpose": "Respuesta al pulsar cualquier control." },
+      { "name": "rise", "value": "translateY(24px)→0 + opacity, ligado a view()", "purpose": "Entrada de las partes de cada sección al desplazarse." }
+    ],
+    "breakpoints": [
+      { "name": "tablet", "value": "1100px" },
+      { "name": "phone", "value": "720px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción principal: abrir la oficina.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Abrir la oficina →</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 26px;background:#d21f2b;color:#fff;border-radius:4px;font:800 22px/1 'Archivo Variable',sans-serif;font-stretch:82%;text-decoration:none;transition:transform 160ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}"
+    },
+    {
+      "name": "Insignia de canal",
+      "kind": "chip",
+      "refersTo": "channel-acelerando",
+      "description": "Etapa de un tema como número de canal.",
+      "html": "<span class=\"ds-ch a\">Acelerando</span> <span class=\"ds-ch e\">Emergente</span> <span class=\"ds-ch p\">Punto máximo</span>",
+      "css": ".ds-ch{display:inline-flex;padding:2px 8px;border-radius:2px;font:750 13px/1.5 'Archivo Variable',sans-serif;font-stretch:82%}.ds-ch.a{background:#d21f2b;color:#fff}.ds-ch.e{background:#1f56b3;color:#fff}.ds-ch.p{background:#f2c230;color:#16130f}"
+    },
+    {
+      "name": "Ítem de navegación activo",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "La sección actual se invierte a tinta.",
+      "html": "<nav class=\"ds-nav\"><a aria-current=\"page\">Tendencias</a><a>Oficina</a></nav>",
+      "css": ".ds-nav{display:grid;gap:4px;width:220px;font:500 16px 'Archivo Variable',sans-serif}.ds-nav a{padding:10px 14px;border-radius:4px;color:#16130f}.ds-nav a[aria-current]{background:#16130f;color:#f1ecdf}"
+    },
+    {
+      "name": "Fila de la parrilla",
+      "kind": "custom",
+      "refersTo": "board-row-open",
+      "description": "Fila de tablero; la abierta pasa a rojo y muestra su evidencia.",
+      "html": "<ol class=\"ds-board\"><li class=\"open\">Keke palmer <span>Acelerando</span></li><li>Camioneta <span>Acelerando</span></li></ol>",
+      "css": ".ds-board{list-style:none;margin:0;padding:16px;display:grid;gap:4px;background:#16130f}.ds-board li{display:flex;justify-content:space-between;align-items:center;min-height:72px;padding:0 24px;background:#2a2620;color:#f1ecdf;border-radius:4px;font:800 22px 'Archivo Variable',sans-serif;font-stretch:82%}.ds-board li.open{background:#d21f2b;color:#fff;min-height:144px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La guía de programación",
+    "overview": "Las tendencias del día impresas como la parrilla de una revista de TV latinoamericana: papel, tinta y un rojo propio; azul y amarillo solo como insignias de canal. Lo seleccionado se invierte como el programa en emisión. Todo dato visible sale de la API.",
+    "keyCharacteristics": ["Archivo con eje de anchura, condensada para títulos", "Baldosas llenas con 8px de separación", "Inversión papel↔tinta para lo activo", "Sin sombras ni degradados", "Personitas pictograma que solo trabajan si la API lo dice"],
+    "rules": [
+      { "name": "La regla del canal", "body": "La etapa es una insignia llena con su nombre.", "section": "colors" },
+      { "name": "La regla de la fila en emisión", "body": "Lo seleccionado se invierte; nunca sombra.", "section": "elevation" },
+      { "name": "Blanco sobre rojo", "body": "El papel sobre rojo no llega a AA; en rojo el texto es blanco.", "section": "colors" }
+    ],
+    "dos": ["Mostrar solo datos de la API y decir cuando faltan", "Usar capturas reales de la oficina", "Respetar prefers-reduced-motion"],
+    "donts": ["Animar actividad no registrada", "Degradados, sombras en reposo, vidrio", "Numerar filas o secciones"]
+  }
+}

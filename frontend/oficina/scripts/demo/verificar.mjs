@@ -69,7 +69,7 @@ async function recovery(officeUrl, salida, stopBackend, restartBackend) {
   const refresh = page.getByRole("button", { name: "Actualizar" });
   const result = {};
   try {
-    await page.goto(`${officeUrl}/?modo=simulated`);
+    await page.goto(`${officeUrl}/oficina?modo=simulated`);
     await stations.waitFor({ state: "attached" });
     result.datosIniciales = await stations.getByRole("button").count();
 

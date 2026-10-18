@@ -1,36 +1,25 @@
-/* Planta arquitectónica: retícula de plano, muros con puertas, salas por módulo. */
+/* Planta de la oficina dibujada en tinta sobre papel: muros, puertas y ventanas de plano. */
 .floor {
   position: relative;
   padding: var(--space-5);
-  border-radius: var(--radius-l);
-  background-color: #12202e;
-  background-image:
-    linear-gradient(rgba(150, 190, 230, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(150, 190, 230, 0.06) 1px, transparent 1px),
-    linear-gradient(rgba(150, 190, 230, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(150, 190, 230, 0.025) 1px, transparent 1px);
-  background-size:
-    80px 80px,
-    80px 80px,
-    16px 16px,
-    16px 16px;
-  border: 2px solid var(--wall);
-  box-shadow: inset 0 0 0 6px #12202e, inset 0 0 0 7px rgba(44, 65, 87, 0.6);
+  border-radius: 2px;
+  background-color: var(--surface);
+  border: 3px solid var(--wall);
+  box-shadow: inset 0 0 0 5px var(--surface), inset 0 0 0 6px var(--wall);
 }
 
-/* Ventanas en el muro norte (detalle arquitectónico estático, no indica actividad). */
+/* Ventanas en el muro norte (convención de plano, estática: no indica actividad). */
 .floor::before {
   content: "";
   display: block;
-  height: 6px;
-  margin: calc(-1 * var(--space-5) + 6px) 12% var(--space-4);
-  background: repeating-linear-gradient(90deg, rgba(108, 200, 244, 0.28) 0 46px, transparent 46px 58px);
-  border-radius: 0 0 2px 2px;
+  height: 5px;
+  margin: calc(-1 * var(--space-5) + 3px) 10% var(--space-4);
+  background: repeating-linear-gradient(90deg, var(--wall) 0 52px, transparent 52px 64px);
 }
 
 .rooms {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-4);
 }
 
@@ -38,7 +27,7 @@
   position: relative;
   padding: var(--space-4) var(--space-4) var(--space-5);
   border: 2px solid var(--wall);
-  background: rgba(15, 26, 38, 0.55);
+  background: var(--bg);
 }
 /* Puerta: un hueco en el muro inferior */
 .room::after {
@@ -49,18 +38,18 @@
   width: 46px;
   height: 2px;
   transform: translateX(-50%);
-  background: #12202e;
+  background: var(--surface);
 }
 .room[data-scope="transversal"] {
-  border-color: rgba(182, 227, 107, 0.35);
+  background: var(--surface-2);
 }
 
 .roomName {
   margin-bottom: var(--space-3);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-  letter-spacing: 0.01em;
+  font-size: 17px;
+  font-stretch: var(--stretch-head);
+  font-weight: 800;
+  color: var(--text);
 }
 
 .desks {
@@ -68,7 +57,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
   gap: var(--space-3);
 }
 
@@ -87,21 +76,33 @@
   touch-action: manipulation;
   transition:
     background-color 160ms var(--ease),
-    border-color 160ms var(--ease);
+    border-color 160ms var(--ease),
+    transform 140ms var(--ease-out);
 }
-.station:hover {
-  background-color: rgba(182, 227, 107, 0.05);
-  border-color: var(--wall);
+@media (hover: hover) and (pointer: fine) {
+  .station:hover {
+    background-color: var(--surface-2);
+    border-color: var(--line-strong);
+  }
+}
+.station:active {
+  transform: scale(0.98);
 }
 .station:focus-visible {
   box-shadow: var(--focus);
 }
 
+/* Cada puesto es un rincón de la oficina: pared clara arriba, suelo abajo. */
 .deskArt {
   position: relative;
-  align-self: center;
+  align-self: stretch;
+  display: grid;
+  place-items: end center;
   max-width: 100%;
-  border-radius: 12px;
+  padding: 10px 8px 0;
+  border-radius: 8px;
+  background: var(--surface-2);
+  border-bottom: 8px solid var(--surface-3);
 }
 /* Pulso solo con actividad real (pendiente o en curso). */
 .live::after {
@@ -109,7 +110,7 @@
   position: absolute;
   inset: -6px;
   border-radius: 16px;
-  border: 2px solid var(--signal);
+  border: 2px solid var(--lamp);
   opacity: 0;
   animation: pulse 2s var(--ease) infinite;
 }
@@ -130,8 +131,8 @@
   min-width: 0;
 }
 .name {
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: 750;
+  font-size: 15.5px;
   line-height: 1.25;
   color: var(--text);
 }
@@ -151,7 +152,7 @@
   gap: var(--space-3) var(--space-6);
   margin-top: var(--space-4);
   padding: var(--space-3) var(--space-4);
-  border-top: 1px dashed var(--wall);
+  border-top: 2px solid var(--wall);
   color: var(--text-muted);
   font-size: 14px;
 }
@@ -172,24 +173,19 @@
   font-weight: 600;
 }
 .coordinator svg {
-  color: var(--signal);
+  color: var(--text);
 }
 .clock svg {
   color: var(--text-faint);
 }
 .clock[data-on="true"] svg {
-  color: var(--signal);
+  color: var(--lamp);
 }
 .corridorSub {
   font-size: 13px;
   font-variant-numeric: tabular-nums;
 }
 
-@media (max-width: 1180px) {
-  .rooms {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
 @media (max-width: 760px) {
   .floor {
     padding: var(--space-3);
@@ -198,17 +194,14 @@
   .floor::before {
     margin: calc(-1 * var(--space-3) + 4px) 8% var(--space-3);
   }
-  .rooms {
-    grid-template-columns: minmax(0, 1fr);
-  }
   .room {
-    grid-column: auto !important;
+    flex-basis: 100% !important;
   }
   .room {
     padding: var(--space-3);
   }
   .desks {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
   }
 }
 

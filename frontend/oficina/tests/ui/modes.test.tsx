@@ -12,6 +12,7 @@ import { OfficeView } from "@/views/OfficeView";
 import { RunsView } from "@/views/RunsView";
 import { SchedulerView } from "@/views/SchedulerView";
 import { TopicsView } from "@/views/TopicsView";
+import { TrendsView } from "@/views/TrendsView";
 
 import { mockApi } from "../support/api";
 import { agentList, classification, definitions, metric, page, rules, scheduler, topic, TOPIC_ID } from "../support/fixtures";
@@ -35,7 +36,8 @@ function routes(mode: "real" | "simulated") {
 }
 
 const VIEWS: [string, string, () => ReactElement][] = [
-  ["Oficina", "/", () => <OfficeView />],
+  ["Tendencias", "/tendencias", () => <TrendsView />],
+  ["Oficina", "/oficina", () => <OfficeView />],
   ["Agentes", "/agentes", () => <AgentsView />],
   ["Ejecuciones", "/ejecuciones", () => <RunsView />],
   ["Programador", "/programador", () => <SchedulerView />],

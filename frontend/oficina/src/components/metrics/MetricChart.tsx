@@ -7,7 +7,7 @@ import type { ScopeSeries } from "@/lib/series";
 
 import styles from "./MetricChart.module.css";
 
-const COLORS = ["#b6e36b", "#6cc8f4", "#f2b85a", "#c9adff", "#58d6a0", "#ff8a7d"];
+const COLORS = ["#d21f2b", "#1f56b3", "#8a5600", "#6a3fa3", "#1b7a47", "#16130f"];
 // Además del color, cada ámbito tiene su trazo (accesible sin color y en blanco y negro).
 const DASHES = ["", "6 4", "2 4", "10 4 2 4", "1 3", "14 6"];
 const W = 720;

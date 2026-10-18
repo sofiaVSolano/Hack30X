@@ -48,8 +48,8 @@ export function OfficeFloor({
               className={styles.room}
               data-scope={scope}
               aria-label={roomName(scope)}
-              // La sala crece con sus puestos: la planta es proporcional a la plantilla real.
-              style={{ gridColumn: `span ${Math.min(members.length, 2)}` }}
+              // La sala crece con sus puestos (mínimo 250px por puesto) y pasa a la fila siguiente si no cabe.
+              style={{ flex: `${members.length} 1 ${members.length * 250}px` }}
             >
               <h3 className={styles.roomName}>{roomName(scope)}</h3>
               <ul className={styles.desks}>
@@ -66,7 +66,7 @@ export function OfficeFloor({
                         aria-label={`${agent.nombre}: ${agent.implementado ? "tarea implementada" : "sin tarea implementada"}. Ver detalle`}
                       >
                         <span className={`${styles.deskArt} ${live ? styles.live : ""}`} data-live={live}>
-                          <Desk activity={agent.actividad} implemented={agent.implementado} />
+                          <Desk who={agent.id} activity={agent.actividad} implemented={agent.implementado} />
                         </span>
                         <span className={styles.plate}>
                           <span className={styles.name}>{agent.nombre}</span>

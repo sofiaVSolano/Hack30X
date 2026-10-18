@@ -13,7 +13,7 @@ function deskState(activity: Activity, implemented: boolean) {
   return {
     state: svg.getAttribute("data-state"),
     typing: svg.querySelectorAll("rect[class*='line']").length,
-    agentDrawn: svg.querySelector("[class*='agent']") !== null,
+    agentDrawn: svg.querySelector("[class*='person']") !== null,
     hidden: svg.getAttribute("aria-hidden"),
   };
 }

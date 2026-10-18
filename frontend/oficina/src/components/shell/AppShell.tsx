@@ -9,6 +9,7 @@ import {
   Layers,
   LayoutDashboard,
   Tags,
+  TrendingUp,
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -20,7 +21,8 @@ import { BrandMark } from "./BrandMark";
 import styles from "./AppShell.module.css";
 
 export const NAV: { href: string; label: string; icon: LucideIcon }[] = [
-  { href: "/", label: "Oficina", icon: LayoutDashboard },
+  { href: "/tendencias", label: "Tendencias", icon: TrendingUp },
+  { href: "/oficina", label: "Oficina", icon: LayoutDashboard },
   { href: "/agentes", label: "Agentes", icon: Bot },
   { href: "/ejecuciones", label: "Ejecuciones", icon: History },
   { href: "/programador", label: "Programador", icon: CalendarClock },
@@ -58,17 +60,17 @@ export function AppShell({ children }: { children: ReactNode }) {
         Saltar al contenido
       </a>
       <aside className={styles.side}>
-        <Link href={href("/")} className={styles.brand} aria-label="HACK 30X, oficina de agentes: inicio">
-          <BrandMark />
+        <Link href="/" className={styles.brand} aria-label="HACK 30X DETECTAR: portada">
+          <BrandMark inverse />
           <span className={styles.brandText}>
             <span className={styles.brandName}>HACK 30X</span>
-            <span className={styles.brandSub}>Oficina de agentes</span>
+            <span className={styles.brandSub}>DETECTAR</span>
           </span>
         </Link>
         <nav aria-label="Secciones de la oficina" className={styles.nav}>
           <ul>
             {NAV.map((item) => {
-              const active = item.href === "/" ? path === "/" : path.startsWith(item.href);
+              const active = path.startsWith(item.href);
               const Icon = item.icon;
               return (
                 <li key={item.href}>

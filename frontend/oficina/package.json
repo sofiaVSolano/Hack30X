@@ -12,6 +12,7 @@
     "build": "next build",
     "start": "node scripts/local.mjs oficina start",
     "backend": "node scripts/local.mjs backend",
+    "tendencias:actualizar": "node scripts/tendencias-reales.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -23,8 +24,8 @@
     "demo:limpiar": "node scripts/demo-simulada.mjs limpiar"
   },
   "dependencies": {
+    "@fontsource-variable/archivo": "5.3.0",
     "@fontsource-variable/jetbrains-mono": "5.3.0",
-    "@fontsource-variable/space-grotesk": "5.3.0",
     "lucide-react": "1.49.0",
     "next": "16.3.7",
     "react": "19.3.0",

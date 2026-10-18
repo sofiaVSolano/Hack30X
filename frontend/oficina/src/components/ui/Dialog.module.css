@@ -7,7 +7,7 @@
   max-height: 100dvh;
 }
 .dialog::backdrop {
-  background: rgba(3, 6, 10, 0.68);
+  background: rgba(30, 24, 16, 0.42);
   backdrop-filter: blur(2px);
 }
 

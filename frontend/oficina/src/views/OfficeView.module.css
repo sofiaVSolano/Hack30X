@@ -40,7 +40,7 @@
 }
 .limits {
   grid-column: span 3;
-  border-color: rgba(243, 185, 74, 0.25);
+  border-color: rgba(138, 86, 0, 0.3);
 }
 .limitList {
   margin: 0;

@@ -59,13 +59,31 @@ npm start              # oficina en http://127.0.0.1:3000   (desarrollo: npm run
 - **Base de datos:** el backend usa `%LOCALAPPDATA%\hack30x\detectar\detectar.db`, salvo que `DETECTAR_DB_PATH` indique otra.
 - **Programador:** está apagado por defecto. Para activarlo hacen falta las variables `DETECTAR_SCHEDULER_*`, descritas en `backend/app/modules/detectar/docs/e11-programador-periodico.md`.
 
-## 5. Demostración con datos sintéticos (base aislada)
+## 5. Tendencias reales
+
+Con el backend en marcha (`npm run backend`) y Wikipedia activada en la configuración
+(`DETECTAR_WIKIMEDIA_MODE=on` y `DETECTAR_HTTP_CONTACT`):
+
+```bash
+npm run tendencias:actualizar
+```
+
+Qué hace:
+1. Trae las tendencias de hoy de Google Trends (países de `DETECTAR_COUNTRIES`).
+2. Busca 45 días de visitas en Wikipedia para esos temas. Prueba variantes de mayúsculas del título y, si un artículo no existe, lo registra como «sin datos».
+3. Normaliza los temas.
+4. Calcula métricas de 10 días y la clasificación con fecha de anteayer, porque Wikipedia publica con un día de retraso.
+
+La página «Tendencias» (`/tendencias`) lo muestra en lenguaje simple, y la portada (`/`) resume la parrilla del día. Si a la fecha más reciente le faltan
+días de Wikipedia, según sus propias métricas, muestra la anterior y lo avisa.
+
+## 6. Demostración con datos sintéticos (base aislada)
 
 ```bash
 cd frontend/oficina
 npm run build
 npm run demo:preparar            # %TEMP%\hack30x-demo-simulada: carga y flujo real (añada -- --reiniciar para recrearla)
-npm run demo:servir              # abra http://127.0.0.1:<puerto>/?modo=simulated ; Ctrl+C para terminar
+npm run demo:servir              # abra http://127.0.0.1:<puerto>/tendencias?modo=simulated ; Ctrl+C para terminar
 npm run demo:limpiar             # borra solo la carpeta marcada de la demostración
 ```
 
@@ -73,7 +91,7 @@ npm run demo:limpiar             # borra solo la carpeta marcada de la demostrac
 - **El flujo:** normalización, métricas y clasificación se ejecutan con los endpoints reales. Resultado: Alfa `acelerando`, Beta `punto_maximo` y tres temas con `datos_insuficientes` y su motivo.
 - **En la oficina:** una franja permanente identifica el modo simulado y el conjunto sintético.
 
-## 6. Pruebas
+## 7. Pruebas
 
 ```bash
 # Backend (desde backend/)
@@ -93,12 +111,12 @@ Resultados en la entrega:
 | Prueba | Resultado |
 |---|---|
 | Backend | 812 pruebas aprobadas |
-| Oficina | 173 pruebas aprobadas |
+| Oficina | 189 pruebas aprobadas |
 | Ruff y TypeScript | Sin errores |
 | Bundle | Sin token |
 | Verificación en Edge | Sin errores de consola, sin violaciones de axe y sin desbordamiento |
 
-## 7. Documentación
+## 8. Documentación
 
 | Tema | Documento |
 |---|---|
@@ -108,7 +126,7 @@ Resultados en la entrega:
 | Contrato con ENTENDER | `backend/app/modules/detectar/docs/contrato-detectar-v0-revision.md` (propuesta, con estado de implementación) |
 | Métricas, etapas, programador y datos simulados | `backend/app/modules/detectar/docs/` |
 
-## 8. Pendientes (decisiones del equipo)
+## 9. Pendientes (decisiones del equipo)
 
 - **Autenticación de usuarios de la oficina:** no existe; no exponer en red.
 - **Integración con ENTENDER:** contrato sin acordar, sin autenticación entre módulos y sin endpoint de resumen.

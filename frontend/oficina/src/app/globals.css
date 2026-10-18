@@ -1,47 +1,51 @@
-/* HACK 30X, oficina de agentes: sistema visual (E15, ver docs/e15-diseno-visual.md).
- * Plano nocturno de una oficina: azul de plano, muros, una señal lima solo para lo activo.
- * Los estados nunca dependen solo del color: siempre llevan icono y texto. */
+/* HACK 30X · DETECTAR: sistema visual (ver .impeccable/surfaces y DESIGN.md).
+ * Guía de programación de TV impresa: papel de revista, tinta, un rojo de cabecera propio,
+ * insignias de canal en azul y amarillo. Archivo (Omnibus-Type) en ancho condensado para
+ * cabeceras y normal para texto. Los estados llevan siempre icono y texto, no solo color. */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --font-sans: "Space Grotesk Variable", "Segoe UI", system-ui, sans-serif;
+  --font-sans: "Archivo Variable", "Archivo", "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", "Cascadia Code", ui-monospace, monospace;
+  --stretch-display: 62%; /* cabeceras y titulares */
+  --stretch-head: 82%; /* subtítulos */
 
-  --bg: #0f1a26; /* noche de plano */
-  --bg-grid: rgba(150, 190, 230, 0.035);
-  --surface: #152434; /* plano */
-  --surface-2: #1a2b3d;
-  --surface-3: #213549;
-  --line: #24384d;
-  --line-strong: #345069;
-  --wall: #2c4157; /* muro */
-  --lamp: #f2b35e; /* luz de lámpara: solo puestos activos */
+  --bg: #f1ecdf; /* papel de revista */
+  --surface: #f8f4ea; /* hoja */
+  --surface-2: #e9e2d2;
+  --surface-3: #ded5c2;
+  --line: #d3c9b4;
+  --line-strong: #b5a98f;
+  --wall: #2a2620; /* trazo de plano en tinta */
+  --lamp: #d21f2b; /* luz «al aire»: solo con ejecución real en curso */
 
-  --text: #e6edf4; /* tinta */
-  --text-muted: #a3b3c4;
-  --text-faint: #8798ab;
+  --text: #16130f; /* tinta */
+  --text-muted: #4a443a;
+  --text-faint: #635b4e;
 
-  --signal: #b6e36b; /* señal HACK 30X: solo lo activo, seleccionado o implementado */
-  --signal-ink: #10200a;
-  --info: #6cc8f4;
-  --ok: #58d6a0;
-  --warn: #f2b85a;
-  --danger: #ff8a7d;
-  --sim: #c9adff;
+  --signal: #d21f2b; /* rojo de cabecera HACK 30X: cabecera, acción principal, en emisión */
+  --signal-ink: #ffffff;
+  --channel-blue: #1f56b3;
+  --channel-yellow: #f2c230;
+  --info: #1f56b3;
+  --ok: #136136;
+  --warn: #6f4500;
+  --danger: #b3261e;
+  --sim: #6a3fa3;
 
-  --info-bg: rgba(92, 200, 245, 0.12);
-  --ok-bg: rgba(70, 217, 155, 0.12);
-  --warn-bg: rgba(243, 185, 74, 0.13);
-  --danger-bg: rgba(255, 122, 112, 0.13);
-  --sim-bg: rgba(196, 162, 255, 0.13);
-  --neutral-bg: rgba(154, 168, 184, 0.12);
+  --info-bg: rgba(31, 86, 179, 0.1);
+  --ok-bg: rgba(27, 122, 71, 0.11);
+  --warn-bg: rgba(242, 194, 48, 0.28);
+  --danger-bg: rgba(179, 38, 30, 0.1);
+  --sim-bg: rgba(106, 63, 163, 0.11);
+  --neutral-bg: rgba(22, 19, 15, 0.07);
 
-  --radius-s: 6px;
-  --radius: 10px;
-  --radius-l: 16px;
-  --shadow: 0 18px 40px rgba(3, 8, 14, 0.45);
-  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--signal);
+  --radius-s: 4px;
+  --radius: 8px;
+  --radius-l: 12px;
+  --shadow: 0 16px 36px rgba(40, 30, 15, 0.18), 0 2px 6px rgba(40, 30, 15, 0.08);
+  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--channel-blue);
 
   --space-1: 4px;
   --space-2: 8px;
@@ -51,7 +55,10 @@
   --space-6: 32px;
   --space-7: 48px;
 
-  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* Curvas (Emil Kowalski): salida firme para la interfaz y curva de cajón para paneles. */
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 *,
@@ -62,7 +69,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  color-scheme: dark;
+  color-scheme: light;
   -webkit-tap-highlight-color: transparent;
 }
 /* En móvil la navegación es fija arriba: el elemento enfocado no debe quedar debajo. */
@@ -76,15 +83,21 @@ body {
   margin: 0;
   min-height: 100vh;
   background-color: var(--bg);
-  background-image:
-    linear-gradient(var(--bg-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
-  background-size: 40px 40px;
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 15.5px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--channel-yellow);
+  color: var(--text);
+}
+html {
+  scrollbar-color: var(--line-strong) var(--bg);
+  accent-color: var(--signal);
+  caret-color: var(--signal);
 }
 
 h1,
@@ -92,9 +105,9 @@ h2,
 h3,
 h4 {
   margin: 0;
-  line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   text-wrap: balance;
   scroll-margin-top: 96px;
 }
@@ -173,12 +186,28 @@ code,
   text-decoration: none;
   touch-action: manipulation;
   transition:
-    background 150ms var(--ease),
-    border-color 150ms var(--ease);
+    background-color 150ms var(--ease),
+    border-color 150ms var(--ease),
+    transform 140ms var(--ease-out);
 }
-.btn:hover {
-  background: var(--surface-3);
-  border-color: var(--text-faint);
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    background: var(--surface-3);
+    border-color: var(--text-faint);
+  }
+  .btn--primary:hover {
+    background: #b51722;
+    border-color: #b51722;
+  }
+}
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.btn--primary {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--signal-ink);
+  font-weight: 650;
 }
 .btn:disabled {
   opacity: 0.55;
@@ -188,9 +217,11 @@ code,
   background: transparent;
   border-color: transparent;
 }
-.btn--ghost:hover {
-  background: var(--surface-2);
-  border-color: var(--line);
+@media (hover: hover) and (pointer: fine) {
+  .btn--ghost:hover {
+    background: var(--surface-2);
+    border-color: var(--line);
+  }
 }
 .btn--icon {
   width: 36px;
@@ -235,10 +266,41 @@ code,
   background: var(--danger-bg);
   color: var(--danger);
 }
+/* Insignias de canal: la etapa como el número de canal de una guía de TV. */
+.channel {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 13px;
+  font-weight: 750;
+  font-stretch: var(--stretch-head);
+  line-height: 1.5;
+  white-space: nowrap;
+  border: 2px solid transparent;
+}
+.channel[data-stage="acelerando"] {
+  background: var(--signal);
+  color: #ffffff;
+}
+.channel[data-stage="emergente"] {
+  background: var(--channel-blue);
+  color: #ffffff;
+}
+.channel[data-stage="punto_maximo"] {
+  background: var(--channel-yellow);
+  color: var(--text);
+}
+.channel[data-stage="datos_insuficientes"],
+.channel[data-stage="saturada"] {
+  border-color: var(--text-faint);
+  color: var(--text-muted);
+}
+
 .badge--sim {
   background: var(--sim-bg);
   color: var(--sim);
-  border-color: rgba(196, 162, 255, 0.35);
+  border-color: rgba(106, 63, 163, 0.35);
 }
 .badge--outline {
   background: transparent;
@@ -264,7 +326,9 @@ code,
   flex-wrap: wrap;
 }
 .panel__title {
-  font-size: 16px;
+  font-size: 19px;
+  font-stretch: var(--stretch-head);
+  font-weight: 750;
 }
 .panel__sub {
   color: var(--text-muted);
@@ -348,7 +412,7 @@ code,
   transition: background 120ms var(--ease);
 }
 .table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(22, 19, 15, 0.035);
 }
 .sort-btn {
   all: unset;
@@ -446,15 +510,15 @@ code,
   margin-top: 2px;
 }
 .notice--warn {
-  border-color: rgba(243, 185, 74, 0.35);
+  border-color: rgba(138, 86, 0, 0.35);
   background: var(--warn-bg);
 }
 .notice--danger {
-  border-color: rgba(255, 122, 112, 0.35);
+  border-color: rgba(179, 38, 30, 0.3);
   background: var(--danger-bg);
 }
 .notice--info {
-  border-color: rgba(92, 200, 245, 0.3);
+  border-color: rgba(31, 86, 179, 0.3);
   background: var(--info-bg);
 }
 .notice__title {
@@ -618,8 +682,11 @@ code,
   margin-bottom: var(--space-5);
 }
 .page-title {
-  font-size: clamp(24px, 3vw, 32px);
-  letter-spacing: -0.02em;
+  font-size: clamp(34px, 4.4vw, 54px);
+  font-stretch: var(--stretch-display);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
 }
 .page-lede {
   color: var(--text-muted);

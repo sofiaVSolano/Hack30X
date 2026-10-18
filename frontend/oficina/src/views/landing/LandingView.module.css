@@ -1,0 +1,990 @@
+/* Portada: la guía de programación impresa. Papel, tinta, rojo propio; azul y amarillo solo como canales. */
+.page {
+  --gap: 8px;
+  --gutter: clamp(16px, 2.4vw, 32px);
+  --tile-radius: var(--radius-sm, 4px);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.5;
+  overflow-x: clip;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+.skip:focus {
+  left: 16px;
+  top: 16px;
+  z-index: 10;
+  padding: 10px 16px;
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* ---------- Cabecera: la banda del nombre y los cuatro accesos ---------- */
+.masthead {
+  padding: var(--gap) var(--gutter) 0;
+  display: grid;
+  gap: var(--gap);
+}
+.nameBand {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  gap: 16px;
+  min-height: 170px;
+  padding: 16px clamp(16px, 2vw, 28px) 4px;
+  background: var(--signal);
+  color: #ffffff;
+  border-radius: var(--tile-radius);
+  overflow: hidden;
+}
+.mark {
+  align-self: start;
+  border-radius: 3px;
+}
+.name {
+  margin: 0;
+  font-weight: 850;
+  font-stretch: var(--stretch-display);
+  font-size: clamp(76px, 15.5vw, 236px);
+  line-height: 0.8;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.edition {
+  align-self: start;
+  margin: 0;
+  max-width: 18ch;
+  text-align: right;
+  font-size: 18px;
+  line-height: 1.3;
+}
+.edition strong {
+  display: block;
+  font-weight: 800;
+  font-stretch: var(--stretch-head);
+  font-size: 22px;
+}
+.edition strong::first-letter {
+  text-transform: uppercase;
+}
+.linkTiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+}
+.linkTiles a {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 20px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--tile-radius);
+  font-weight: 750;
+  font-stretch: var(--stretch-head);
+  font-size: 22px;
+  text-decoration: none;
+  transition: background-color 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+.linkTiles a:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Hero: raíl izquierdo, imagen central con su frase, raíl de color ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gap);
+  padding: var(--gap) var(--gutter);
+  height: clamp(560px, calc(100svh - 250px), 720px);
+}
+.leftRail {
+  grid-column: span 3;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: var(--gap);
+  min-height: 0;
+}
+.portrait {
+  position: relative;
+  margin: 0;
+  border-radius: var(--tile-radius);
+  overflow: hidden;
+  background: var(--surface-2);
+  min-height: 180px;
+}
+.portrait img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 2% 30%;
+}
+.facts {
+  list-style: none;
+  margin: 0;
+  padding: 18px 20px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  background: var(--surface-2);
+  border-radius: var(--tile-radius);
+  font-size: 22px;
+  line-height: 1.2;
+}
+.facts strong {
+  display: inline-block;
+  min-width: 2.2ch;
+  margin-right: 6px;
+  font-weight: 850;
+  font-stretch: var(--stretch-display);
+  font-size: 36px;
+  line-height: 1;
+  color: var(--signal);
+}
+
+.centre {
+  grid-column: span 6;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: var(--gap);
+  min-height: 0;
+}
+.shutter {
+  position: relative;
+  margin: 0;
+  min-height: 160px;
+  overflow: hidden;
+  border-radius: var(--tile-radius);
+  background: var(--surface-2);
+}
+.shutter img {
+  position: absolute;
+  inset: 0;
+}
+.shutter img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.statement {
+  margin: 0;
+  padding: 22px 24px 20px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--tile-radius);
+}
+.headline {
+  margin: 0 0 8px;
+  font-weight: 850;
+  font-stretch: var(--stretch-head);
+  font-size: 36px;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.statement p {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 18px;
+  color: #e9e2d2;
+}
+.statement .onAir {
+  font-size: 22px;
+  line-height: 1.25;
+  margin-top: 12px;
+  padding-top: 12px;
+  color: #ffffff;
+}
+.onAir strong {
+  font-weight: 800;
+  font-stretch: var(--stretch-head);
+  font-size: 22px;
+  color: var(--channel-yellow);
+}
+
+.rightRail {
+  grid-column: span 3;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr) 1.4fr;
+  gap: var(--gap);
+}
+.tile {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-radius: var(--tile-radius);
+  font-size: 22px;
+  line-height: 1.2;
+}
+.tile strong {
+  font-weight: 850;
+  font-stretch: var(--stretch-display);
+  font-size: 44px;
+  line-height: 1;
+  min-width: 1.4ch;
+}
+[data-tone="1"].tile,
+.agentTiles li[data-tone="1"],
+.stagesBar li[data-tone="1"],
+.blocks span[data-tone="1"] {
+  background: var(--surface-3);
+  color: var(--text);
+}
+[data-tone="2"].tile,
+.agentTiles li[data-tone="2"],
+.stagesBar li[data-tone="2"],
+.blocks span[data-tone="2"] {
+  background: var(--channel-yellow);
+  color: var(--text);
+}
+[data-tone="3"].tile,
+.agentTiles li[data-tone="3"],
+.stagesBar li[data-tone="3"],
+.blocks span[data-tone="3"] {
+  background: var(--channel-blue);
+  color: #ffffff;
+}
+[data-tone="4"].tile,
+.agentTiles li[data-tone="4"],
+.stagesBar li[data-tone="4"],
+.blocks span[data-tone="4"] {
+  background: var(--text);
+  color: var(--bg);
+}
+.actionTile {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px;
+  background: var(--signal);
+  color: #ffffff;
+  border-radius: var(--tile-radius);
+  text-decoration: none;
+  font-weight: 850;
+  font-stretch: var(--stretch-head);
+  font-size: 36px;
+  line-height: 1;
+  transition: transform 160ms var(--ease-out), background-color 160ms var(--ease-out);
+}
+.actionTile svg {
+  flex: none;
+  transition: transform 200ms var(--ease-out);
+}
+.actionTile:active,
+.ctaButton:active,
+.agentTile:active,
+.rowButton:active {
+  transform: scale(0.97);
+}
+
+/* ---------- La parrilla: filas de un tablero de salidas sobre tinta ---------- */
+.showcase {
+  margin: var(--gap) var(--gutter);
+  padding: clamp(28px, 4vw, 56px) clamp(16px, 3vw, 48px) clamp(16px, 2vw, 24px);
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--tile-radius);
+}
+.showcaseHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+.sectionTitle {
+  margin: 0;
+  font-weight: 850;
+  font-stretch: var(--stretch-display);
+  font-size: clamp(48px, 6.4vw, 104px);
+  line-height: 0.9;
+}
+.lede {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 18px;
+}
+.showcase .lede {
+  color: #e9e2d2;
+}
+.boardNote {
+  margin: 0;
+  padding: 24px;
+  font-size: 18px;
+}
+.board {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.row {
+  background: #2a2620;
+  border-radius: var(--tile-radius);
+  transition: background-color 200ms var(--ease-out);
+}
+.row[data-open="true"] {
+  background: var(--signal);
+  color: #ffffff;
+}
+.rowButton {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 72px;
+  padding: 0 24px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out);
+}
+.rowName {
+  font-weight: 800;
+  font-stretch: var(--stretch-head);
+  font-size: 22px;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+.row[data-open="true"] .rowName {
+  font-size: 36px;
+}
+.board :global(.channel) {
+  font-size: 16px;
+  padding: 4px 10px;
+}
+.board :global(.channel[data-stage="datos_insuficientes"]),
+.board :global(.channel[data-stage="saturada"]) {
+  border-color: #a39a8a;
+  color: #e9e2d2;
+}
+.row[data-open="true"] :global(.channel) {
+  border-color: #ffffff;
+}
+.rowDetail {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: end;
+  padding: 4px 24px 28px;
+  min-height: 144px;
+}
+.rowSentence {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.3;
+  max-width: 34ch;
+}
+.rowMeta {
+  margin: 0;
+  font-size: 18px;
+}
+.rowLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+  padding: 0 18px;
+  background: #ffffff;
+  color: var(--text);
+  border-radius: var(--tile-radius);
+  font-weight: 750;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 160ms var(--ease-out);
+}
+.rowLink:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Cómo decide: una barra con las duraciones reales ---------- */
+.how {
+  padding: clamp(48px, 7vw, 112px) var(--gutter) clamp(24px, 3vw, 40px);
+}
+.bigTitle {
+  margin: 0 0 28px;
+  font-weight: 850;
+  font-stretch: var(--stretch-display);
+  font-size: clamp(48px, 6.4vw, 104px);
+  line-height: 0.9;
+}
+.stagesBar {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--gap);
+}
+.stagesBar li {
+  flex-basis: 0;
+  min-width: 0;
+  display: grid;
+  align-content: space-between;
+  gap: 40px;
+  min-height: 240px;
+  padding: 20px;
+  border-radius: var(--tile-radius);
+}
+.stagesBar strong {
+  font-weight: 850;
+  font-stretch: var(--stretch-head);
+  font-size: 36px;
+  line-height: 1;
+}
+.stagesBar span {
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+/* ---------- Reglas: la palabra gigante y las barras ---------- */
+.rules {
+  padding: clamp(24px, 4vw, 56px) var(--gutter);
+  container-type: inline-size;
+}
+.giantWord {
+  margin: 0 0 32px;
+  font-weight: 900;
+  font-stretch: var(--stretch-display);
+  font-size: 30cqi;
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: var(--signal);
+  letter-spacing: -0.01em;
+}
+.bars {
+  display: grid;
+  gap: var(--gap);
+}
+.bars details {
+  background: var(--surface-2);
+  border-radius: var(--tile-radius);
+}
+.bars details[open] {
+  background: var(--text);
+  color: var(--bg);
+}
+.bars summary {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 24px;
+  font-weight: 800;
+  font-stretch: var(--stretch-head);
+  font-size: 22px;
+  cursor: pointer;
+  list-style: none;
+  transition: transform 160ms var(--ease-out);
+}
+.bars summary::-webkit-details-marker {
+  display: none;
+}
+.bars summary::after {
+  content: "+";
+  margin-left: auto;
+  font-size: 36px;
+  font-weight: 700;
+}
+.bars details[open] summary::after {
+  content: "–";
+}
+.bars summary:active {
+  transform: scale(0.99);
+}
+.bars details p {
+  margin: 0;
+  padding: 0 24px 24px;
+  max-width: 70ch;
+  font-size: 18px;
+}
+
+/* ---------- Agentes: pictogramas sobre baldosas de color ---------- */
+.agents {
+  padding: clamp(40px, 6vw, 96px) var(--gutter) clamp(24px, 3vw, 40px);
+}
+.agents .sectionTitle {
+  margin-bottom: 28px;
+}
+.agentTiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--gap);
+}
+.agentTiles li {
+  border-radius: var(--tile-radius);
+}
+.agentTile {
+  display: grid;
+  gap: 4px;
+  height: 100%;
+  padding: 20px 20px 22px;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 160ms var(--ease-out);
+}
+.agentArt {
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  padding: 12px;
+  background: var(--bg);
+  border-radius: var(--tile-radius);
+}
+.agentTile strong {
+  font-weight: 800;
+  font-stretch: var(--stretch-head);
+  font-size: 22px;
+  line-height: 1.1;
+}
+.agentTile span:last-child {
+  font-size: 16px;
+}
+
+/* ---------- Llamada final: la baldosa de acción entre dos imágenes ---------- */
+.cta {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gap);
+  padding: clamp(40px, 6vw, 96px) var(--gutter) var(--gap);
+}
+.ctaImage,
+.ctaSide {
+  margin: 0;
+  grid-column: span 2;
+  border-radius: var(--tile-radius);
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.ctaImage img,
+.ctaSide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ctaImage img {
+  object-position: 10% 20%;
+}
+.ctaSide img {
+  object-position: 80% 50%;
+}
+.ctaTile {
+  grid-column: span 8;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 16px;
+  min-height: 360px;
+  padding: clamp(24px, 4vw, 56px);
+  background: var(--signal);
+  color: #ffffff;
+  border-radius: var(--tile-radius);
+}
+.ctaTile h2 {
+  margin: 0;
+  font-weight: 850;
+  font-stretch: var(--stretch-display);
+  font-size: clamp(48px, 6.4vw, 104px);
+  line-height: 0.92;
+  max-width: 14ch;
+}
+.ctaTile p {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 18px;
+}
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 26px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--tile-radius);
+  font-weight: 800;
+  font-stretch: var(--stretch-head);
+  font-size: 22px;
+  text-decoration: none;
+  transition: transform 160ms var(--ease-out);
+}
+.ctaButton svg {
+  transition: transform 200ms var(--ease-out);
+}
+
+/* ---------- Pie: la marca construida con bloques ---------- */
+.footer {
+  padding: var(--gap) var(--gutter) 24px;
+}
+.blocks {
+  margin: 0 0 32px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--gap);
+}
+.blocks span {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1.05;
+  border-radius: var(--tile-radius);
+  font-weight: 900;
+  font-stretch: var(--stretch-display);
+  font-size: clamp(56px, 11vw, 176px);
+  line-height: 1;
+}
+.blocks span:nth-child(5),
+.blocks span:nth-child(6),
+.blocks span:nth-child(7) {
+  background: var(--signal);
+  color: #ffffff;
+}
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.columns h2 {
+  margin: 0 0 10px;
+  font-weight: 800;
+  font-stretch: var(--stretch-head);
+  font-size: 22px;
+}
+.columns nav {
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+}
+.columns a {
+  color: var(--text);
+  font-size: 18px;
+  text-underline-offset: 3px;
+}
+.columns p {
+  margin: 0;
+  max-width: 40ch;
+  font-size: 18px;
+}
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding-top: 16px;
+  font-size: 16px;
+  color: var(--text-muted);
+}
+.toTop {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--tile-radius);
+  text-decoration: none;
+  font-size: 16px;
+  transition: transform 160ms var(--ease-out);
+}
+.toTop:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Hover solo con puntero fino ---------- */
+@media (hover: hover) and (pointer: fine) {
+  .linkTiles a:hover {
+    background: var(--signal);
+    color: #ffffff;
+  }
+  .actionTile:hover {
+    background: #b51a25;
+  }
+  .actionTile:hover svg,
+  .ctaButton:hover svg {
+    transform: translateX(4px);
+  }
+  .row:not([data-open="true"]):hover {
+    background: #3b352c;
+  }
+  .agentTile:hover .agentArt {
+    outline: 3px solid currentColor;
+    outline-offset: -3px;
+  }
+  .columns a:hover {
+    color: var(--signal);
+  }
+}
+
+/* ---------- Movimiento ---------- */
+/* Persiana: la captura central se descubre de arriba abajo una sola vez y se asienta. */
+.shutter {
+  animation: shutter 1.1s var(--ease-drawer) both;
+}
+.shutter img {
+  animation: settle 1.6s var(--ease-out) both;
+}
+@keyframes shutter {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes settle {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+/* Entrada de impresión: el nombre, los accesos y las baldosas del hero, escalonados. */
+.name,
+.linkTiles a,
+.leftRail > *,
+.statement,
+.rightRail > * {
+  animation: rise 520ms var(--ease-out) both;
+}
+.linkTiles a:nth-child(1) { animation-delay: 80ms; }
+.linkTiles a:nth-child(2) { animation-delay: 130ms; }
+.linkTiles a:nth-child(3) { animation-delay: 180ms; }
+.linkTiles a:nth-child(4) { animation-delay: 230ms; }
+.leftRail > :nth-child(1) { animation-delay: 260ms; }
+.leftRail > :nth-child(2) { animation-delay: 320ms; }
+.statement { animation-delay: 620ms; }
+.rightRail > :nth-child(1) { animation-delay: 300ms; }
+.rightRail > :nth-child(2) { animation-delay: 360ms; }
+.rightRail > :nth-child(3) { animation-delay: 420ms; }
+.rightRail > :nth-child(4) { animation-delay: 480ms; }
+.rightRail > :nth-child(5) { animation-delay: 540ms; }
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Secciones: entran al aparecer, ligadas al desplazamiento; sin soporte, se ven quietas. */
+@supports (animation-timeline: view()) {
+  .sectionTitle,
+  .bigTitle,
+  .lede,
+  .stagesBar li,
+  .bars details,
+  .agentTiles li,
+  .ctaImage,
+  .ctaTile,
+  .ctaSide,
+  .blocks span,
+  .columns > * {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+  /* Las filas de la parrilla solo se desplazan: su texto sobre rojo mantiene siempre el contraste. */
+  .board > li {
+    animation: lift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+  .giantWord {
+    animation: slide linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 60%;
+  }
+  .ctaSide img {
+    animation: drift linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+}
+@keyframes lift {
+  from {
+    transform: translateY(24px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slide {
+  from {
+    transform: translateX(-6%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes drift {
+  from {
+    transform: scale(1.18) translateY(-4%);
+  }
+  to {
+    transform: scale(1.04) translateY(2%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page *,
+  .page *::before,
+  .page *::after {
+    animation: none !important;
+    transition-duration: 0ms !important;
+  }
+}
+
+/* ---------- Tableta ---------- */
+@media (max-width: 1100px) {
+  .hero {
+    grid-template-columns: repeat(6, 1fr);
+    height: auto;
+  }
+  .rightRail {
+    grid-template-rows: none;
+  }
+  .centre {
+    grid-column: 1 / -1;
+    order: -1;
+    height: auto;
+  }
+  .shutter {
+    height: 420px;
+  }
+  .leftRail,
+  .rightRail {
+    grid-column: span 3;
+  }
+  .agentTiles {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .stagesBar {
+    flex-wrap: wrap;
+  }
+  .stagesBar li {
+    flex: 1 1 calc(50% - var(--gap));
+    min-height: 180px;
+  }
+  .rowDetail {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .rowMeta {
+    grid-column: 1;
+  }
+}
+
+/* ---------- Teléfono: su propia composición en dos columnas ---------- */
+@media (max-width: 720px) {
+  .page {
+    font-size: 18px;
+  }
+  .nameBand {
+    grid-template-columns: auto 1fr;
+    min-height: 0;
+    padding-top: 12px;
+  }
+  .name {
+    grid-column: 1 / -1;
+    order: 3;
+    font-size: 21vw;
+  }
+  .linkTiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .linkTiles a {
+    font-size: 18px;
+    padding: 0 14px;
+  }
+  .hero {
+    grid-template-columns: repeat(2, 1fr);
+    min-height: 0;
+  }
+  .shutter {
+    height: 300px;
+  }
+  .statement {
+    padding: 16px;
+  }
+  .leftRail,
+  .rightRail {
+    grid-column: 1 / -1;
+  }
+  .rightRail {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;
+  }
+  .actionTile {
+    grid-column: 1 / -1;
+    min-height: 96px;
+  }
+  .tile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .showcaseHead {
+    grid-template-columns: 1fr;
+  }
+  .rowButton {
+    padding: 0 16px;
+    gap: 10px;
+  }
+  .rowDetail {
+    grid-template-columns: 1fr;
+    padding: 4px 16px 20px;
+  }
+  .stagesBar {
+    flex-direction: column;
+  }
+  .stagesBar li {
+    flex: none;
+    min-height: 0;
+    gap: 16px;
+  }
+  .agentTiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cta {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ctaTile {
+    grid-column: 1 / -1;
+    order: -1;
+    min-height: 0;
+  }
+  .ctaImage,
+  .ctaSide {
+    grid-column: span 1;
+    aspect-ratio: 1;
+  }
+  .columns {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .blocks {
+    gap: 4px;
+  }
+  .blocks span {
+    font-size: 10vw;
+  }
+}
